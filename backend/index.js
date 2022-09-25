@@ -6,6 +6,11 @@ app.listen(8800,()=>{
     console.log("Successfully listening on port 8800");
 })
 
+app.get("/",(req, res)=>{
+    res.send("hello this is the landing page of guitara");
+})
+
+
 app.get("/about",(req, res)=>{
     res.send("hello this is the landing page of guitara");
 })
