@@ -6,10 +6,10 @@ function Header() {
   return (
     <div id='main'>
         <Navbar/>
-        <video src={video} autoPlay loop muted/>
-        <div className='name'>
-            <h1><span>Go where the Guitar takes you</span></h1>
-        </div>
+          <video src={video} autoPlay loop muted/>
+          <div className='name'>
+              <h1><span>Go where the Guitar takes you...</span></h1>    
+          </div>
     </div>
   )
 }

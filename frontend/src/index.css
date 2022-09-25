@@ -1,7 +1,6 @@
 body{
     margin:0px;
     padding: 0px;
-    
     background-color: #ffffff;
 }
 *{
@@ -9,7 +8,6 @@ body{
 }
 ul{
     list-style: none;
-    
 }
 a{
     text-decoration: none;
@@ -23,21 +21,22 @@ input{
     border: none;
 }
 .logo img{
-    width: 90px;
+    max-width: 100%;
+    width: 130px;
+    margin: 0 auto;
 }
 #main{
-
     width:100%;
     height:768px;
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    
+    /* background: url(../frontend/src/images/whiteBG);   */
 }
 
 video{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
 }
 
@@ -45,7 +44,7 @@ nav{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 0;
 	width:100%;
@@ -61,9 +60,10 @@ nav ul{
     background-color: #ef6600;
     color:#ffffff;
 	transition: all ease 0.2s;
+    /* border-radius: 15%; */
 }
 nav ul li a{
-    font-family: 'Cedarville Cursive', cursive;
+    font-family: 'Cormorant Garamond', serif;
 	height:40px;
 	line-height: 43px;
 	margin: 3px;
@@ -74,7 +74,7 @@ nav ul li a{
 	font-weight: 500;
 	color:#ffffff;
     letter-spacing: 1px;
-    border-radius: 3px;
+    /* border-radius: 3px; */
     transition: 0.2s ease-in-out;
 }
 
@@ -89,6 +89,8 @@ nav .menu-btn,
     left: 22%;
 	top: 50%;
 	transform: translate(-22%,-50%);
+    margin: auto;
+
 }
 .name span{
     color: #ffffff;
@@ -322,20 +324,21 @@ font-size: 2rem;
 }
 .s-b-text p{
     margin: 0px;
-    color:#000266a6;
+    color: #ef6600;
     font-size: 1.1rem;
     font-family: calibri;
     display: block;
     display: -webkit-box;
     max-width: 80%;
     margin-top: 25px;
+    margin-bottom: 25px;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .s-b-text p:hover{
-    color:#000266;
+    color:#ef6800b4;
 }
 .s-b-text a{
     margin-top:15px ;
@@ -448,6 +451,7 @@ font-size: 2rem;
 @media(max-width:970px){
 	.main{
 		background-image: none !important;
+
 		
 	}
 	.name{

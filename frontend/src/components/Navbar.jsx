@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import logo from '../images/Guitara-logo.png';
+import logo from '../images/Guitara-logo1.png';
 
 function Navbar() {
     const [nav, setnav] = useState(false);
