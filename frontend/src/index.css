@@ -36,7 +36,7 @@ input{
 
 video{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -83,19 +83,19 @@ nav .menu-btn,
 		display:none;
 	}
 .name{
-	font-family: 'Montserrat';
-	width: 500px;
+	/* font-family: 'Montserrat'; */
+	width: 850px;
 	position: absolute;
-    left: 22%;
+    left: 35%;
 	top: 50%;
 	transform: translate(-22%,-50%);
     margin: auto;
-
 }
 .name span{
     color: #ffffff;
     font-family: 'Cormorant Garamond', serif;
     padding: auto;
+    font-size: 100px;
 }
 .name .details{
     color: #969696;
@@ -127,6 +127,16 @@ nav .menu-btn,
     transition: all ease 0.5s;
     color: #ffffff;
 }
+.feature-head{
+    text-align: center;
+    margin-top: 40px;
+    /* font-size: ; */
+    font-family: 'Cormorant Garamond', serif;
+}
+.feature-head span{
+    color: #ef6600;
+    font-weight: bolder;
+}
 
 .f-heading h1{
     color:#FFFFFF;
@@ -149,14 +159,16 @@ nav .menu-btn,
   #about{
     margin-top:100px ;
 	width:100%;
-	height: 120vh;
-	background-color:#f3fdff;
+	height: 80vh;
+	background-color:#ef6600;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 50px 5% 0px 5%;
 	position: relative;
+    padding-bottom: 50px;
+    /* margin-top: -30px; */
 }
 
 .about-text{
@@ -165,8 +177,8 @@ nav .menu-btn,
     list-style: circle;
 }
 .about-text h2{
-	font-size: 2rem;
-	color:#00b7ff;
+	font-size: 3rem;
+	color:#ffffff;
     font-weight: 500;
     margin: 0px;
 	padding: 0px;
@@ -175,9 +187,10 @@ nav .menu-btn,
     width: 80%;
 	font-size: 1.2rem;
 	color:#272727;
-	
+    line-height: 1.4rem;	
 }
 .about-text button{
+    font-size: 1rem;
     margin-top: 20px;
 	width: 140px;
 	height: 45px;
@@ -208,7 +221,7 @@ nav .menu-btn,
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 40px ;
+    margin-top: -60px ;
     background-color: #ffffff;
 }
 .a-container{
@@ -324,13 +337,13 @@ font-size: 2rem;
 }
 .s-b-text p{
     margin: 0px;
-    color: #ef6600;
+    color: #000000;
     font-size: 1.1rem;
     font-family: calibri;
     display: block;
     display: -webkit-box;
     max-width: 80%;
-    margin-top: 25px;
+    /* margin-top: 25px; */
     margin-bottom: 25px;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -338,10 +351,13 @@ font-size: 2rem;
     text-overflow: ellipsis;
 }
 .s-b-text p:hover{
-    color:#ef6800b4;
+    color:#5a5a5ab4;
 }
 .s-b-text a{
     margin-top:15px ;
+}
+.s-b-text h2{
+    color: #ef6600;
 }
 .s-type{
     font-family: calibri;
