@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Feature from "./components/Feature";
 import About from './components/About';
 import exercises_vid from './video/exercises_vid.mp4';
+import Bottom from "./components/Bottom";
 
 import './index.css'
 
@@ -13,6 +14,7 @@ function App() {
       <h1 className='feature-head'>A place for you to <span>learn, practice </span>and <span>show off</span>..</h1>
       <Feature/>
       <About video={exercises_vid} title='Joyful Moments Together' button='Community'/>
+      <Bottom/>
     </div>
   );
 }
