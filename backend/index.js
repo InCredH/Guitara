@@ -1,13 +1,15 @@
-import express from "express"
-
+import express from "express";
+const path = require('path');
 const app = express()
+app.use(express.static('public'));
 
 app.listen(8800,()=>{
     console.log("Successfully listening on port 8800");
 })
 
 app.get("/",(req, res)=>{
-    res.send("hello this is the landing page of guitara");
+    res.sendFile(path.join(__dirname + "/frontend/public/index.html"));
+    // console.log(__dirname);
 })
 
 

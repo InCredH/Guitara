@@ -428,12 +428,22 @@ font-size: 2rem;
 		background-size: 1150px !important;
 		
 	}
+    .active{
+        background-color: transparent;
+
+    }
 	.name{
 		left: 50%;
 		top: 50%;
         transform: translate(-50%,-50%);
         text-align: center;
+        visibility: hidden;
 	}
+
+    .name span{
+        font-size: 30px;
+    }
+
 	.about-image img{
 		height:400px;
     }
@@ -520,9 +530,10 @@ font-size: 2rem;
             justify-content: space-between;
             height: 65px;
             padding: 0px 30px;
+            padding-top: 30px;
         }
         .logo img{
-            width:70px;
+            width:110px;
         }
         .header-btns{
             margin: 0;
@@ -532,8 +543,6 @@ font-size: 2rem;
             position:absolute;
             top:65px;
             left:0px;
-            background-color:#FFFFFF;
-            border-bottom:4px solid #1db096;
             width:100%;
             padding:0px;
             margin:0px;
@@ -558,7 +567,7 @@ font-size: 2rem;
             user-select: none;
         }
         nav .menu-icon .nav-icon{
-            background-color:#333333;
+            background-color:#fff;
             display:block;
             height:2px;
             position:relative;
@@ -567,7 +576,7 @@ font-size: 2rem;
         }
         nav .menu-icon .nav-icon:before,
         nav .menu-icon .nav-icon:after{
-            background:#333;
+            background:#fff;
             content:'';
             display:block;
             height:100%;
@@ -606,9 +615,10 @@ font-size: 2rem;
         }
 
 
-/* Footer Styling */
+
+
+/******************** Footer Styling ***********************/
 footer{
-	position: fixed;
 	bottom: 0;
     margin: 0;
 }

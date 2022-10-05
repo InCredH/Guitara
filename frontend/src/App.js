@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <h1 className='feature-head'>A place for you to <span>learn, practice </span>and <span>show off</span>..</h1>
+
       <Feature/>
       <About video={exercises_vid} title='Joyful Moments Together' button='Community'/>
       <Bottom/>

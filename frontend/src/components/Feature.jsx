@@ -7,6 +7,9 @@ import featureimage3 from '../images/home_lessons.jpg';
 
 function Feature() {
   return (
+    <div className='features-header'>
+      <h1 className='features-head'>A place for you to <span>learn, practice </span>and <span>show off</span>..</h1>
+    
     <div id = 'features'>
         <div className = 'a-container'>
             <FeatureBox image = {featureimage1} title = 'Community' details = 'Learn together with our Guitara Community. Share your progress and show off your skills with others'/>
@@ -14,6 +17,7 @@ function Feature() {
             <FeatureBox image = {featureimage3} title = 'Lessons and Exercises' details = 'It’s never too early - or too late - to learn to play an instrument. With our interactive step-by-step lessons, you’ll discover something new every time you play the songs you love.'/>
 
         </div>
+    </div>
     </div>
   )
 }
