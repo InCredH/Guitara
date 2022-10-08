@@ -1,16 +1,24 @@
 import express from "express";
-const path = require('path');
+const cors = require('cors');
+app.use(cors())
 const app = express()
 app.use(express.static('public'));
+
 
 app.listen(8800,()=>{
     console.log("Successfully listening on port 8800");
 })
 
+// listen() {
+//     this.app.listen(this.port, () => {
+//       console.log("Server running on port: ", this.port);
+//     });
+//   }
+
 app.get("/",(req, res)=>{
-    res.sendFile(path.join(__dirname + "/frontend/public/index.html"));
-    // console.log(__dirname);
-})
+    res.send("Hello this is home!");
+
+});
 
 
 app.get("/about",(req, res)=>{

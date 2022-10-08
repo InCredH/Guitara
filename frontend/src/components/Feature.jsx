@@ -4,20 +4,19 @@ import featureimage1 from '../images/home_com.jpg';
 import featureimage2 from '../images/home_tools.jpg';
 import featureimage3 from '../images/home_lessons.jpg';
 
-
 function Feature() {
   return (
-    <div className='features-header'>
-      <h1 className='features-head'>A place for you to <span>learn, practice </span>and <span>show off</span>..</h1>
-    
-    <div id = 'features'>
-        <div className = 'a-container'>
-            <FeatureBox image = {featureimage1} title = 'Community' details = 'Learn together with our Guitara Community. Share your progress and show off your skills with others'/>
-            <FeatureBox image = {featureimage2} title = 'Tools' details = 'To help you improve your Guitar skills, tune your guitar and play with the beats using our accurate tuner and metronome'/>
-            <FeatureBox image = {featureimage3} title = 'Lessons and Exercises' details = 'It’s never too early - or too late - to learn to play an instrument. With our interactive step-by-step lessons, you’ll discover something new every time you play the songs you love.'/>
-
-        </div>
-    </div>
+    <div className='f-main'>
+      <div>
+        <h1 className='feature-head'>A place for you to <span>learn, practice </span>and <span>show off</span>..</h1>
+      </div>
+      <div id = 'features'> 
+          <div className = 'a-container'>
+              <FeatureBox image = {featureimage1} title = 'Community' details = 'Learn together with our Guitara Community. Share your progress and show off your skills with others'/>
+              <FeatureBox image = {featureimage2} title = 'Tools' details = 'To help you improve your Guitar skills, tune your guitar and play with the beats using our accurate tuner and metronome'/>
+              <FeatureBox image = {featureimage3} title = 'Lessons and Exercises' details = 'It’s never too early - or too late - to learn to play an instrument. With our interactive step-by-step lessons, you’ll discover something new every time you play the songs you love.'/>
+          </div>
+      </div>
     </div>
   )
 }

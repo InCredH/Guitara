@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from '../images/Guitara-logo1.png';
+import axios from 'axios';
 
 function Navbar() {
     const [nav, setnav] = useState(false);
@@ -16,7 +17,7 @@ function Navbar() {
   
     return (
     <nav className='nav'>
-        <a href='#' className='logo'>
+        <a href='/' className='logo'>
             <img src = {logo} alt = ''/>
         </a>
         <input type = 'checkbox' className='menu-btn' id = 'menu-btn' />
@@ -26,7 +27,7 @@ function Navbar() {
         <ul className='menu'>
             <li><a href='#'>Exercises</a></li>
             <li><a href='#'>Lessons</a></li>
-            <li><a href='#'>Tools</a></li>
+            <li><a href='/tools'>Tools</a></li>
             <li><a href='#'>About</a></li>
             <li><a href='#'>Community</a></li>
             <li><a href='#' className='active'>Login</a></li>

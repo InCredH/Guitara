@@ -1,11 +1,10 @@
 import React from 'react';
-import Feature from './Feature';
+import Tools from './Tools';
 
-
-function FeatureBox(props){
+function ToolBox(props){
     return (
-        <div className='a-box'>
-            <div className='a-b-img'>
+        <div className='t-box'>
+            <div className='t-b-img'>
                 <img src={props.image}/>
             </div>
             <div className='s-b-text'>
@@ -16,4 +15,4 @@ function FeatureBox(props){
     );
 }
 
-export default FeatureBox;
+export default ToolBox;
