@@ -30,7 +30,7 @@ function Navbar() {
             <li><a href='/tools'>Tools</a></li>
             <li><a href='#'>About</a></li>
             <li><a href='#'>Community</a></li>
-            <li><a href='#' className='active'>Login</a></li>
+            <li><a href='/login' className='active'>Login</a></li>
             <li><a href='#' className='active'>Signup</a></li>
         </ul>
     </nav>

@@ -10,6 +10,7 @@ import "./style1.css";
 import Tools from "./components/Tools";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./components/Login";
 
 function App() {
   
@@ -30,10 +31,13 @@ function App() {
           <Route exact path="/tools">
             <Tools />
           </Route>
-          
+          <Route exact path="/login">
+            <Login />
+          </Route>
         </Switch>
         <Bottom />
       </div>
+      
     </Router>
   );
 }
