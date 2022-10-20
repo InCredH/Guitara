@@ -10,10 +10,25 @@ require('dotenv').config();
 var authRoutes = require('./routes/auth');
 var db  = require('./models/User');
 
-
 //app
 const app = express()
 app.use(express.static('public'));
+  
+  const corsOptions = {
+    origin: "*",
+  };
+
+//middlewares
+app.use(bodyParser.json());
+app.use(cors(corsOptions));
+
+
+//routes middleware
+app.use('/api', authRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Hallaluya");
+});
 
 //connecting to backend
 const connectionParams={
@@ -33,12 +48,4 @@ catch(error){
   app.listen(process.env.PORT, () => {
     console.log('listening for requests on port', process.env.PORT);
   })
-  
-
-//middlewares
-app.use(bodyParser.json());
-app.use(cors());
-
-//routes middleware
-app.use('/api', authRoutes);
 

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import logo from '../images/Guitara-logo1.png';
 import axios from 'axios';
+import avatar from '../images/avatar.svg';
 
-function Navbar() {
+function Navbar({isAuthenticated, user}) {
     const [nav, setnav] = useState(false);
 
     const changeBackground = () => {
@@ -14,6 +15,10 @@ function Navbar() {
         }
     }
     window.addEventListener('scroll', changeBackground);
+
+    useEffect(()=>{
+       console.log(isAuthenticated) 
+    },[isAuthenticated])
   
     return (
     <nav className='nav'>
@@ -25,13 +30,15 @@ function Navbar() {
             <span className='nav-icon' ></span>
         </label>
         <ul className='menu'>
+        
             <li><a href='#'>Exercises</a></li>
             <li><a href='#'>Lessons</a></li>
             <li><a href='/tools'>Tools</a></li>
             <li><a href='#'>About</a></li>
             <li><a href='#'>Community</a></li>
-            <li><a href='/login' className='active'>Login</a></li>
-            <li><a href='#' className='active'>Signup</a></li>
+            {
+                isAuthenticated ? <div className="avatar"><img src={avatar} alt="" /></div> : <li><a href='/login' className='active'>Login</a></li>
+            }
         </ul>
     </nav>
   )

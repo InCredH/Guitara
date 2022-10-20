@@ -9,15 +9,15 @@ const {createJWT,} = require("../utils/auth");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 exports.signup = (req, res, next) => {
-  let { firstName, lastName, email, userName, password, password_confirmation } = req.body;
+  let { email, userName, password, password_confirmation } = req.body;
 
   let errors = [];
-  if (!firstName) {
-    errors.push({ firstName: "required" });
-  }
-  if (!lastName) {
-    errors.push({ lastName: "required" });
-  }
+  // if (!firstName) {
+  //   errors.push({ firstName: "required" });
+  // }
+  // if (!lastName) {
+  //   errors.push({ lastName: "required" });
+  // }
   if (!email) {
     errors.push({ email: "required" });
   }
@@ -30,14 +30,14 @@ exports.signup = (req, res, next) => {
   if (!password) {
     errors.push({ password: "required" });
   }
-  if (!password_confirmation) {
-    errors.push({
-     password_confirmation: "required",
-    });
-  }
-  if (password != password_confirmation) {
-    errors.push({ password: "mismatch" });
-  }
+  // if (!password_confirmation) {
+  //   errors.push({
+  //    password_confirmation: "required",
+  //   });
+  // }
+  // if (password != password_confirmation) {
+  //   errors.push({ password: "mismatch" });
+  // }
   if (errors.length > 0) {
     return res.status(422).json({ errors: errors });
   }
@@ -49,8 +49,6 @@ exports.signup = (req, res, next) => {
       }else {
          const user = new User({
            userName: userName,
-           lastName: lastName,
-           firstName: firstName,
            email: email,
            password: password,
          });
@@ -75,6 +73,7 @@ exports.signup = (req, res, next) => {
       });
      }
   }).catch(err =>{
+    console.log(err);
       res.status(500).json({
         errors: [{ error: 'Something went wrong' }]
       });

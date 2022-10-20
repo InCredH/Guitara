@@ -51,6 +51,7 @@
 	border-radius: 20px;
 	border: 1px solid #ef6600;
 	background-color: #ef6600;
+	width: max-content;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -117,7 +118,7 @@
 	z-index: 2;
 }
 
-.login-container .right-panel-active .sign-in-container {
+.login-container.right-panel-active .sign-in-container {
 	transform: translateX(100%);
 }
 
@@ -128,7 +129,7 @@
 	z-index: 1;
 }
 
-.login-container .right-panel-active .sign-up-container {
+.login-container.right-panel-active .sign-up-container {
 	transform: translateX(100%);
 	opacity: 1;
 	z-index: 5;
@@ -158,7 +159,7 @@
 	z-index: 100;
 }
 
-.login-container .right-panel-active .overlay-container{
+.login-container.right-panel-active .overlay-container{
 	transform: translateX(-100%);
 }
 
@@ -179,7 +180,7 @@
 	transition: transform 0.6s ease-in-out;
 }
 
-.login-container .right-panel-active .overlay {
+.login-container.right-panel-active .overlay {
   	transform: translateX(50%);
 }
 
@@ -202,7 +203,7 @@
 	transform: translateX(-20%);
 }
 
-.login-container .right-panel-active .overlay-left {
+.login-container.right-panel-active .overlay-left {
 	transform: translateX(0);
 }
 
@@ -211,7 +212,7 @@
 	transform: translateX(0);
 }
 
-.login-container .right-panel-active .overlay-right {
+.login-container.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
 

@@ -1,13 +1,15 @@
 
 .tools_background{
     background-image: url("./images/tools_back.png");
-    /* width:100%;
-    height: 100vh; */
+    width:100%;
+    height: 100vh;
     background-position: center center;
     position: relative;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    display: grid;
+    place-items: center;
 }
 
 
@@ -16,10 +18,6 @@
     height: 100vh !important;
 }
 
-.more_margin{
-    padding-top: 135px;
-    padding-bottom: 100px;
-}
 
 .t-box{
     background-color: #ffffff;

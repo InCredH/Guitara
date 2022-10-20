@@ -9,7 +9,7 @@ function Tools() {
   return (
     <div className='features-header tools_background'>
         <div id='main img_back_change'>
-            <div id = 'features name'>
+            <div id='features name'>
                 <div className = 'a-container more_margin'>
                     <ToolBox image = {tools_tuner} title = 'Tuner'/>
                     <ToolBox image = {tools_metro} title = 'Metronome' />
