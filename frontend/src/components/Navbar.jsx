@@ -20,6 +20,10 @@ function Navbar({isAuthenticated, user}) {
        console.log(isAuthenticated) 
     },[isAuthenticated])
   
+    const deleteItem = () => {
+        localStorage.clear();
+      }
+
     return (
     <nav className='nav'>
         <a href='/' className='logo'>
@@ -37,7 +41,7 @@ function Navbar({isAuthenticated, user}) {
             <li><a href='#'>About</a></li>
             <li><a href='#'>Community</a></li>
             {
-                isAuthenticated ? <div className="avatar"><img src={avatar} alt="" /></div> : <li><a href='/login' className='active'>Login</a></li>
+                isAuthenticated ? <div className='new'><div className="avatar"><img src={avatar} alt="" /></div><li><a href='/login' className='active'onClick={deleteItem} >Logout</a></li></div> : <li><a href='/login' className='active'>Login</a></li>
             }
         </ul>
     </nav>
