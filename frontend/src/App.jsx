@@ -6,10 +6,10 @@ import About from "./components/About";
 import Bottom from "./components/Bottom";
 import "./index.css";
 import "./style1.css";
-import Tools from "./components/Tools";
+import Tools from "./pages/Tools/Tools";
 import Navbar from "./components/Navbar";
 import {Routes, Route} from "react-router";
-import Login from "./components/Login";
+import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
       setUser(user1);
       setIsAuthenticated(true);
     }else {
-      console.log("in else");
+      console.log("in else  of app.jsx");
     }
   },[isAuthenticated])
 
