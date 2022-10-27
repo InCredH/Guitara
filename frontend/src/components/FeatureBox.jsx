@@ -1,5 +1,4 @@
 import React from 'react';
-import Feature from './Feature';
 
 
 function FeatureBox(props){

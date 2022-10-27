@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 import Feature from "../../components/Feature";
-import About from "../../components/About";
+import CommunityCard from "../../components/community_card";
 import exercises_vid from "../../video/exercises_vid.mp4";
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <Header />
       <Feature />
-      <About
+      <CommunityCard
         video={exercises_vid}
         title="Joyful Moments Together"
         button="Community"

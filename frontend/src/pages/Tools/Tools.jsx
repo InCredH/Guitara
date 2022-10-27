@@ -3,6 +3,7 @@ import ToolBox from './ToolBox';
 import tools_metro from '../../images/tools_metro.png';
 import tools_tuner from '../../images/tools_tuner.png';
 import tool_drum from '../../images/tools_drum.png';
+import "./style1.css";
 
 
 function Tools() {
