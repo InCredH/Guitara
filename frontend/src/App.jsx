@@ -1,16 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import Header from "./components/Header";
-// import Feature from "./components/Feature";
-// import About from "./components/community_card";
 import Bottom from "./components/Bottom";
 import "./index.css";
 import Tools from "./pages/Tools/Tools";
 import Navbar from "./components/Navbar";
+import Community_landing from "./components/Community_landing";
 import {Routes, Route} from "react-router";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Lessons_landing from "./pages/Lessons-landing-page/lessons_landing";
+import About from "./pages/about/Aboutpg";
+import Community_home from "./pages/Community/Comunity_home";
+import Notes_Lessons from "./pages/Notes-lessons/Notes_lessons";
+import C_post from "./pages/Createpost/C_post";
+
+
 
 
 function App() {
@@ -37,7 +41,11 @@ function App() {
           <Route exact path="/" element={<Home isAuthenticated={isAuthenticated} />}></Route>
           <Route exact path="/tools" element={ <Tools isAuthenticated={isAuthenticated} />}></Route>
           <Route exact path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>}></Route>
-          <Route exact path="/lessons-landing-page" element = {<Lessons_landing />}></Route>
+          <Route exact path="/lessons" element = {<Lessons_landing />}></Route>
+          <Route exact path="/about" element = {<About />}></Route>
+          <Route exact path="/community" element = {<Community_home />}></Route>
+          <Route exact path="/lessons/notes" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/createpost" element = {<C_post />}></Route>
         </Routes>
         <Bottom />
       </div>

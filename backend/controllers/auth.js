@@ -1,8 +1,5 @@
-// import User from '../models/User.js';
 var User = require('../models/User.js');
-// import jwt from 'jsonwebtoken';
 var jwt = require('jsonwebtoken');
-// import bcrypt from 'bcrypt';
 var bcrypt = require('bcrypt');
 const {createJWT,} = require("../utils/auth");
 
@@ -12,12 +9,7 @@ exports.signup = (req, res, next) => {
   let { email, userName, password, password_confirmation } = req.body;
 
   let errors = [];
-  // if (!firstName) {
-  //   errors.push({ firstName: "required" });
-  // }
-  // if (!lastName) {
-  //   errors.push({ lastName: "required" });
-  // }
+  
   if (!email) {
     errors.push({ email: "required" });
   }
@@ -53,7 +45,6 @@ exports.signup = (req, res, next) => {
            password: password,
          });
 
-
          bcrypt.genSalt(10, function(err, salt) { bcrypt.hash(password, salt, function(err, hash) {
          if (err) throw err;
          user.password = hash;
@@ -78,6 +69,7 @@ exports.signup = (req, res, next) => {
         errors: [{ error: 'Something went wrong' }]
       });
   })
+  re
 }
 exports.signin = (req, res) => {
      let { email, password } = req.body;

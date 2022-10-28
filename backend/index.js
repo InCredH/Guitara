@@ -7,8 +7,12 @@ var bodyParser = require('body-parser')
 require('dotenv').config();
 
 //import routes
-var authRoutes = require('./routes/auth');
 var db  = require('./models/User');
+var authRoutes = require('./routes/auth');
+
+var dbpost  = require('./models/Post');
+var postRoutes = require('./routes/createPost');
+
 
 //app
 const app = express()
@@ -25,6 +29,7 @@ app.use(cors(corsOptions));
 
 //routes middleware
 app.use('/api', authRoutes);
+app.use('/api/community', postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hallaluya");
@@ -35,6 +40,7 @@ const connectionParams={
   useNewUrlParser:true,
   useUnifiedTopology:true,
 };
+
 try{
   mongoose.connect(process.env.MONGO_URI,connectionParams);
   console.log("Connected to Database Sucessfully");

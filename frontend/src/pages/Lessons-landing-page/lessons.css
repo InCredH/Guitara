@@ -1,14 +1,108 @@
-.main_back{
-    background-color: #05012e;
-    width:100%;
-    height: 100vh;
-}
-
-.squares{
+.blue-body{
     position: relative;
-    height: 100px;
-    width: 100px;
+    background-color: #05012e;
+    width: 100%;
+    height: 100vh;
+    /* margin-top: -35px; */
+    background-size: cover;
+    /* z-index: -1; */
 }
 
+.orange-square{
+    position: absolute;
+    background-color: #ef6600;
+    height: 320px;
+    width: 320px;
+    transform: rotate(20deg);
+    margin-top: 14%;
+    /* z-index: 5; */
+    margin-left: 12%;
+
+
+}
+
+.white-square{
+    position: absolute;
+    background-color: white;
+    height: 320px;
+    width: 320px;
+    margin-top: 14%;
+    margin-left: 12%;
+}
+
+.title{
+    color: white;
+    padding-left: 55%;
+    padding-top: 17%;
+    font-size: larger;
+}
+
+.contents{
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0%;
+    margin-top: 13px;
+
+}
+
+hr{
+    border: none;
+    height: 4px;
+    width: 250px;
+    background: black;
+}
+
+ul{
+    list-style-type: none;
+    margin-left: -35px;
+
+}
+
+li{
+    list-style: none;
+    font-family: 'Cormorant Garamond', serif;
+    margin: 5px;
+}
+
+ul li{
+    list-style: none;
+}
+
+.both{
+    position: relative;
+}
+
+.pitch_drop ul li a{
+    list-style-type: none;
+    text-decoration: none;
+    color: black !important;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.structure_drop ul li a{
+    list-style-type: none;
+    text-decoration: none;
+    color: black !important;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.structure_drop{
+    position: absolute;
+    top: 40px;
+    left: 170px; 
+    /* top: 0%;
+    right: 0%; */
+}
+.pitch_drop{
+    position: absolute;
+    /* float: left; */
+    left: 40px;
+}
+
+.notes_image{
+    margin-left: 50%;
+
+}
 
 

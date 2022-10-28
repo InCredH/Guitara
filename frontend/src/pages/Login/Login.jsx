@@ -2,10 +2,12 @@ import React from "react";
 import "./loginStyles.css";
 import axios from "axios";
 import {useRef, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
 
 const API_URL = process.env.REACT_APP_API_URL;
 function Login({setIsAuthenticated}) {
-
+  const navigate = useNavigate();
   const loginContainerRef = useRef(null);
   const [signupData, setSignupData] = useState({
 		email: "",
@@ -18,6 +20,7 @@ function Login({setIsAuthenticated}) {
 		password: "",
 	});
 
+
 	const Signup = async (e) => {
     e.preventDefault();
     try {
@@ -27,6 +30,7 @@ function Login({setIsAuthenticated}) {
         password: signupData.password
       })
       console.log(res)
+      
     }catch(e) {
       console.log(e);
     }
@@ -51,6 +55,7 @@ function Login({setIsAuthenticated}) {
     }catch(e) {
       console.log(e);
     }
+    // navigate('/community-landing-page');
     loginContainerRef.current.value = '';
   } 
 
@@ -72,7 +77,6 @@ function Login({setIsAuthenticated}) {
     loginContainerRef.current.classList.toggle("right-panel-active");
   }
     
-
 
   return (
     <div className="body-login">
@@ -96,7 +100,7 @@ function Login({setIsAuthenticated}) {
             <input value={signupData.userName} onChange={signupInputHandler} type="text" placeholder="Name" name="userName" />
             <input value={signupData.email} onChange={signupInputHandler} type="email" placeholder="Email" name="email"/>
             <input value={signupData.password} onChange={signupInputHandler} type="password" placeholder="Password" name="password" />
-            <button onClick={Signup}>Sign Up</button>
+            <button type="submit" onClick={Signup}>Sign Up</button>
           </form>
         </div>
         <div className="form-container sign-in-container">

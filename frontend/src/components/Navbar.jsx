@@ -37,16 +37,16 @@ function Navbar({ isAuthenticated, user }) {
           <a href="#">Exercises</a>
         </li>
         <li>
-          <a href="/Lessons-landing-page">Lessons</a>
+          <a href="/lessons">Lessons</a>
         </li>
         <li>
           <a href="/tools">Tools</a>
         </li>
         <li>
-          <a href="#">About</a>
+          <a href="/about">About</a>
         </li>
         <li>
-          <a href="#">Community</a>
+          <a href="/community-landing-page">Community</a>
         </li>
         {isAuthenticated ? (
           <div className="new">
