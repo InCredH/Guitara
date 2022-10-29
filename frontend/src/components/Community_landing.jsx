@@ -9,16 +9,17 @@ export default function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    // if (!token) {
-    //   alert("Please Login first !");
-    //   navigate("/login");
-    // }
+    const user = JSON.parse(localStorage.getItem("guitaraUser"));
+    if (!user) {
+      alert("Please Login first !");
+      navigate("/login");
+      return;
+    }
     
     // Fetching all posts
-    fetch("http://localhost:8800/allposts", {
+    fetch("http://localhost:8800/api/allposts", {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        Authorization: "Bearer " + user.token,
       },
     })
       .then((res) => res.json())

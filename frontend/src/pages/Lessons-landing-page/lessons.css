@@ -1,39 +1,69 @@
 .blue-body{
-    position: relative;
     background-color: #05012e;
     width: 100%;
     height: 100vh;
     /* margin-top: -35px; */
     background-size: cover;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
     /* z-index: -1; */
 }
 
-.orange-square{
-    position: absolute;
-    background-color: #ef6600;
+.blue-body .left_container {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: flex-start;
+    align-items: center;
+    margin-left: 140px;
+}
+
+.pitch_drop ul li a.active{
+    font-weight: 600;
+}
+
+.info_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin-left: auto;
+}
+
+.box_wrapper {
+    position: relative;
     height: 320px;
     width: 320px;
-    transform: rotate(20deg);
-    margin-top: 14%;
-    /* z-index: 5; */
-    margin-left: 12%;
-
-
+    margin-left: 50px;
 }
 
 .white-square{
     position: absolute;
-    background-color: white;
-    height: 320px;
-    width: 320px;
-    margin-top: 14%;
-    margin-left: 12%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1;
+}
+
+.box_wrapper::after {
+    content: '';
+    position: absolute;
+    background-color: #ef6600;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: rotate(20deg);
+    z-index: 0;
 }
 
 .title{
     color: white;
-    padding-left: 55%;
-    padding-top: 17%;
     font-size: larger;
 }
 
@@ -41,8 +71,7 @@
     font-family: 'Cormorant Garamond', serif;
     text-align: center;
     font-size: 2rem;
-    margin: 0%;
-    margin-top: 13px;
+    margin-top: 20px;
 
 }
 
@@ -99,10 +128,4 @@ ul li{
     /* float: left; */
     left: 40px;
 }
-
-.notes_image{
-    margin-left: 50%;
-
-}
-
 

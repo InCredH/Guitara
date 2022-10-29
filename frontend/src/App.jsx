@@ -13,7 +13,8 @@ import About from "./pages/about/Aboutpg";
 import Community_home from "./pages/Community/Comunity_home";
 import Notes_Lessons from "./pages/Notes-lessons/Notes_lessons";
 import C_post from "./pages/Createpost/C_post";
-
+import Notes_Staff from "./pages/Notes-The-Staff/Notes_Staff";
+// import {ToastContainer} from "react-toastify"
 
 
 
@@ -45,6 +46,13 @@ function App() {
           <Route exact path="/about" element = {<About />}></Route>
           <Route exact path="/community" element = {<Community_home />}></Route>
           <Route exact path="/lessons/notes" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/lessons/staff" element = {<Notes_Staff />}></Route>
+          <Route exact path="/lessons/clefs" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/lessons/accidentals" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/lessons/intervals" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/lessons/chords" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/lessons/scales" element = {<Notes_Lessons />}></Route>
+          <Route exact path="/lessons/keys" element = {<Notes_Lessons />}></Route>
           <Route exact path="/createpost" element = {<C_post />}></Route>
         </Routes>
         <Bottom />

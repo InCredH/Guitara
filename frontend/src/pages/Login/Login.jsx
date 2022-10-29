@@ -30,6 +30,19 @@ function Login({setIsAuthenticated}) {
         password: signupData.password
       })
       console.log(res)
+      const userData = {
+        userName: res.data.message.userName,
+        email: res.data.message.email,
+        token: res.data.token
+      }
+      const stringUserData = JSON.stringify(userData);
+      localStorage.setItem("guitaraUser", stringUserData);
+      setIsAuthenticated(true);
+      setSignupData({
+        email: "",
+        userName: "",
+        password: "",
+      });
       
     }catch(e) {
       console.log(e);
@@ -52,11 +65,17 @@ function Login({setIsAuthenticated}) {
       const stringUserData = JSON.stringify(userData);
       localStorage.setItem("guitaraUser", stringUserData);
       setIsAuthenticated(true);
+      setLoginData({
+          email: "",
+          userName: "",
+          password: "",
+        })
     }catch(e) {
       console.log(e);
     }
-    // navigate('/community-landing-page');
+    navigate('/community');
     loginContainerRef.current.value = '';
+    
   } 
 
 	const signupInputHandler = (event) => {
@@ -71,6 +90,7 @@ function Login({setIsAuthenticated}) {
 		setLoginData((prevData) => {
 			return { ...prevData, [name]: value };
 		});
+    
 	}
 
   const tabChange = () => {

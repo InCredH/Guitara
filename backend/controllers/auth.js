@@ -37,7 +37,7 @@ exports.signup = (req, res, next) => {
   User.findOne({email: email})
    .then(user=>{
       if(user){
-         return res.status(422).json({ errors: [{ user: "email already exists" }] });
+         return res.status(409).json({ errors: [{ user: "email already exists" }] });
       }else {
          const user = new User({
            userName: userName,
@@ -50,10 +50,15 @@ exports.signup = (req, res, next) => {
          user.password = hash;
          user.save()
              .then(response => {
-                res.status(200).json({
-                  success: true,
-                  result: response
-                })
+              let access_token = createJWT(
+                        user.email,
+                        user._id,
+                        3600);
+              return res.status(201).json({
+                success: true,
+                token: access_token,
+                message: user
+             });
              })
              .catch(err => {
                res.status(500).json({
@@ -69,7 +74,6 @@ exports.signup = (req, res, next) => {
         errors: [{ error: 'Something went wrong' }]
       });
   })
-  re
 }
 exports.signin = (req, res) => {
      let { email, password } = req.body;

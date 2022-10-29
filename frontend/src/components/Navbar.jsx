@@ -34,7 +34,7 @@ function Navbar({ isAuthenticated, user }) {
       </label>
       <ul className="menu">
         <li>
-          <a href="#">Exercises</a>
+          <a href="/exercises">Exercises</a>
         </li>
         <li>
           <a href="/lessons">Lessons</a>
@@ -46,7 +46,7 @@ function Navbar({ isAuthenticated, user }) {
           <a href="/about">About</a>
         </li>
         <li>
-          <a href="/community-landing-page">Community</a>
+          <a href="/community">Community</a>
         </li>
         {isAuthenticated ? (
           <div className="new">

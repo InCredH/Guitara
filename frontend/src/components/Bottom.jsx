@@ -8,8 +8,8 @@ function Bottom() {
           <img src={logo} alt="" />
 
         <p class="footer-links">
-          <a href="#">Home</a>|<a href="#">Exercises</a>|<a href="#">Lessons</a>|
-          <a href="#">Tools</a>|<a href="#">Community</a>
+          <a href="/">Home</a>|<a href="/exercises">Exercises</a>|<a href="/lessons">Lessons</a>|
+          <a href="/tools">Tools</a>|<a href="/community">Community</a>
         </p>
 
         <p class="footer-company-name">
