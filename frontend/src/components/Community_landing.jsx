@@ -47,14 +47,14 @@ export default function Community_landing() {
             </div>
             {/* card image */}
             <div className="card-image">
-              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw=&auto=format&fit=crop&w=500&q=60" alt="" />
+              <img src={posts.photo} alt="" />
             </div>
 
             {/* card content */}
             <div className="card-content">
               <span className="material-symbols-outlined">favorite</span>
               <p>1 Like</p>
-              <p>Hello </p>
+              <p>{posts.body} </p>
             </div>
 
             {/* add Comment */}
