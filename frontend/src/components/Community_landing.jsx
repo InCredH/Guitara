@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default function Home() {
+export default function Community_landing() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("guitaraUser"));
+   const getPosts=async()=>{
+    const user = await JSON.parse(localStorage.getItem("guitaraUser"));
     if (!user) {
       alert("Please Login first !");
       navigate("/login");
@@ -17,14 +16,17 @@ export default function Home() {
     }
     
     // Fetching all posts
-    fetch("http://localhost:8800/api/allposts", {
+    fetch("http://localhost:8800/api/community/allposts", {
       headers: {
-        Authorization: "Bearer " + user.token,
+        Authorization: user.token,
       },
     })
       .then((res) => res.json())
       .then((result) => setData(result))
       .catch((err) => console.log(err));
+   }
+  useEffect(() => {
+    getPosts();
   }, []);
 
   return (
@@ -41,18 +43,18 @@ export default function Home() {
                   alt=""
                 />
               </div>
-              <h5>{posts.postedBy.name}</h5>
+              <h5>{posts.postedBy.userName}</h5>
             </div>
             {/* card image */}
             <div className="card-image">
-              <img src={posts.photo} alt="" />
+              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw=&auto=format&fit=crop&w=500&q=60" alt="" />
             </div>
 
             {/* card content */}
             <div className="card-content">
               <span className="material-symbols-outlined">favorite</span>
               <p>1 Like</p>
-              <p>{posts.body} </p>
+              <p>Hello </p>
             </div>
 
             {/* add Comment */}

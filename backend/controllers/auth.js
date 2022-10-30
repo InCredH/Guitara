@@ -56,7 +56,7 @@ exports.signup = (req, res, next) => {
                         3600);
               return res.status(201).json({
                 success: true,
-                token: access_token,
+                token: "Bearer "+access_token,
                 message: user
              });
              })
@@ -116,7 +116,7 @@ decoded) => {
          if (decoded) {
              return res.status(200).json({
                 success: true,
-                token: access_token,
+                token: "Bearer "+access_token,
                 message: user
              });
            }

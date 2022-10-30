@@ -13,17 +13,17 @@ export default function Createpost() {
   
   // Toast functions
 
-
-
-  useEffect(() => {
-    // saving post to mongodb
-    console.log(url)
+const createPost=async()=>{
+console.log(url)
     if (url) {
+      const guitaraUser= localStorage.getItem("guitaraUser");
+      const User=await JSON.parse(guitaraUser);
+      console.log(User.token)
       fetch(`${SERVER_URL}/community/createPost`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("jwt")
+          "Authorization":  User.token,
         },
         body: JSON.stringify({
           body,
@@ -40,7 +40,10 @@ export default function Createpost() {
         })
         .catch(err => console.log(err))
     }
+}
 
+  useEffect(() => {
+     createPost()// saving post to mongodb
   }, [url])
 
 

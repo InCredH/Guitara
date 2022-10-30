@@ -23,6 +23,8 @@ function Navbar({ isAuthenticated, user }) {
     localStorage.clear();
   };
 
+  var path = window.location.pathname;
+  console.log(path==='/community')
   return (
     <nav className="nav">
       <a href="/" className="logo">
@@ -46,8 +48,17 @@ function Navbar({ isAuthenticated, user }) {
           <a href="/about">About</a>
         </li>
         <li>
-          <a href="/community">Community</a>
+          {isAuthenticated && path === "/community" ? (
+            <li>
+            <a href="/community/createPost" className="active" >
+              CreatePost
+            </a>
+          </li>
+          ) : (
+            <a href="/community">Community</a>
+          )}
         </li>
+
         {isAuthenticated ? (
           <div className="new">
             <div className="avatar">
@@ -58,6 +69,12 @@ function Navbar({ isAuthenticated, user }) {
                 Logout
               </a>
             </li>
+            {path === '/community' ? (
+              <div></div>
+            ) : (
+              <div>
+              </div>
+            )}
           </div>
         ) : (
           <li>

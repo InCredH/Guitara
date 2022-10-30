@@ -53,7 +53,7 @@ function App() {
           <Route exact path="/lessons/chords" element = {<Notes_Lessons />}></Route>
           <Route exact path="/lessons/scales" element = {<Notes_Lessons />}></Route>
           <Route exact path="/lessons/keys" element = {<Notes_Lessons />}></Route>
-          <Route exact path="/createpost" element = {<C_post />}></Route>
+          <Route exact path="/community/createpost" element = {<C_post />}></Route>
         </Routes>
         <Bottom />
       </div>

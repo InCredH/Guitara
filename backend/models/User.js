@@ -15,7 +15,7 @@ let userSchema = new Schema({
    }
 },{
    timestamps: true,
-   collection: 'users'
+   // collection: 'users'
 })
 
 module.exports = mongoose.model('User', userSchema);

@@ -13,7 +13,6 @@ var authRoutes = require('./routes/auth');
 var dbpost  = require('./models/Post');
 var postRoutes = require('./routes/createPost');
 
-
 //app
 const app = express()
 app.use(express.static('public'));
@@ -30,12 +29,13 @@ app.use(cors(corsOptions));
 //routes middleware
 app.use('/api', authRoutes);
 app.use('/api/community', postRoutes);
+// app.use('/api/community', allpostRoutes)
 
 app.get("/", (req, res) => {
-  res.send("Hallaluya");
+  res.send("Backend is setup and running!");
 });
 
-//connecting to backend
+//connencting to backend
 const connectionParams={
   useNewUrlParser:true,
   useUnifiedTopology:true,
