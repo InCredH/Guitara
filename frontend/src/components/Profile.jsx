@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default function Community_landing () {
+export default function profile_landing () {
   
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -18,7 +18,7 @@ export default function Community_landing () {
     }
 
     // Fetching all posts
-    fetch("http://localhost:8800/api/community/allposts", {
+    fetch("http://localhost:8800/api/community/profileposts", {
       headers: {
         Authorization: user.token,
       },
@@ -72,4 +72,3 @@ export default function Community_landing () {
     </div>
   );
 }
-
