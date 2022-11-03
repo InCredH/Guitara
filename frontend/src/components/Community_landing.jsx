@@ -11,11 +11,13 @@ export default function Community_landing () {
   
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
+    
     if (!user) {
       alert("Please Login first !");
       navigate("/login");
       return;
     }
+    
 
     // Fetching all posts
     fetch("http://localhost:8800/api/community/allposts", {
@@ -50,7 +52,8 @@ export default function Community_landing () {
             </div>
             {/* card image */}
             <div className="card-image">
-              <img src={posts.photo} alt="" />
+              {/* <img src={posts.photo} alt="" /> */}
+              <video src={posts.photo} alt="" controls/>
             </div>
 
             {/* card content */}

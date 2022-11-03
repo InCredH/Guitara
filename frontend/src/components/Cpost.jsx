@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../pages/Createpost/cpost.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
@@ -14,6 +14,7 @@ export default function Createpost() {
   // Toast functions
 
 const createPost=async()=>{
+  
 console.log(url)
     if (url) {
       const guitaraUser= localStorage.getItem("guitaraUser");
@@ -55,8 +56,6 @@ console.log(url)
 //     // data.append("file", image)
 //     // data.append("upload_preset", "guitaradb")
 //     // data.append("cloud_name", "guitara")
-
-    
 //   }
 
 
@@ -73,7 +72,7 @@ console.log(url)
     // .then(data => setUrl(data.URL))
     // .catch(err => console.log(err))
 
-    fetch("https://api.cloudinary.com/v1_1/guitara/image/upload", {
+    fetch("https://api.cloudinary.com/v1_1/guitara/video/upload", {
       method: "post",
       body: data
     }).then(async (res) => {
@@ -93,6 +92,7 @@ console.log(url)
   const loadfile = (event) => {
     var output = document.getElementById("output");
     console.log(output)
+    console.log(event)
     output.src = URL.createObjectURL(event.target.files[0]);
     output.onload = function () {
       URL.revokeObjectURL(output.src); // free memory
@@ -115,7 +115,7 @@ console.log(url)
             <input
             type="file"
             name="file"
-            accept="image/*"
+            accept="video/*"
             onChange={(event) => {
                 loadfile(event);
                 setImage(event.target.files[0])

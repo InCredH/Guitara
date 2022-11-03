@@ -16,15 +16,23 @@ router.get("/allposts", passport.authenticate("jwt", { session: false }), (req, 
     // console.log(posts)
 })
 
+router.delete("/postdelete", passport.authenticate("jwt", { session: false }), (req, res) => {
+    console.log(req);
+    POST.deleteOne()
+        .populate("postedBy", "_id userName")
+        .then(posts => res.json(posts))
+        .catch(err => console.log(err))
+    // console.log(posts)
+})
+
 router.get("/profileposts", passport.authenticate("jwt", { session: false }), (req, res) => {
     // console.log(req)
     console.log(req.user._id)
     const user = req.user._id
-     POST.find({postedBy: user})
-        // .populate("postedBy", "_id userName")
+    POST.find({postedBy: user}).sort({"createdAt": -1})
+        .populate("postedBy", "_id userName")
         .then(posts => res.json(posts))
         .catch(err => console.log(err))
-    // console.log(posts)
 })
 
 //create post

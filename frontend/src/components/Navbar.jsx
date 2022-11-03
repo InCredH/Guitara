@@ -62,7 +62,7 @@ function Navbar({ isAuthenticated, user }) {
         {isAuthenticated ? (
           <div className="new">
             <div className="avatar">
-              <img src={avatar} alt="" />
+              <a href="/community/profile"><img src={avatar} alt="" /></a>
             </div>
             <li>
               <a href="/login" className="active" onClick={deleteItem}>

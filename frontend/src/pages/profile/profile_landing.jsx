@@ -1,22 +1,58 @@
 import React, { useEffect, useState } from "react";
-import "../pages/Community/community_home.css";
+import "./profile_landing.css";
 import { useNavigate } from "react-router-dom";
+import avatar from "../../images/avatar.svg";
 
-const API_URL = process.env.REACT_APP_API_URL;
+
+
+
+const SERVER_URL = process.env.REACT_APP_API_URL;
 
 export default function profile_landing () {
   
+  var guitaraUser;
+  var [likes, setLikes] = useState(1);
+  // var [user, setUser] = useState(null);
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  const deleteItem = async () =>{
+    fetch(`${SERVER_URL}/community/postdelete`, {
+      method: "DELETE",
+    })
+    .catch((err) => console.log(err))
+  }
+  
+  function postId(id){
+    console.log(id);
+  } 
+  function changecColor() {
+    var element = document.getElementById("myDIV");
+    element.classList.toggle("mystyle"); 
+    setLikes(++likes)
+    // element.classList.toggle("fa fa-heart"); 
+    // element.classList.toggle("far fa-heart"); 
+  }
+
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   
+  function editDetails(){
+
+  }
+
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
+    guitaraUser = user.userName;
+    console.log(guitaraUser);
     if (!user) {
       alert("Please Login first !");
       navigate("/login");
       return;
     }
-
+    
     // Fetching all posts
     fetch("http://localhost:8800/api/community/profileposts", {
       headers: {
@@ -34,7 +70,17 @@ export default function profile_landing () {
   
   return (
     <div className="home">
-      {/* card */}
+      <div className="user">
+        <div className="userImage">
+          <img src={avatar} />
+        </div>
+        <div className="details">
+          {/* <h3>{data[0].postedBy.userName}</h3> */}
+          <a onClick = {editDetails} href="#">edit profile</a>
+        </div>
+      </div>
+      <h1>Posts : </h1>
+      
       {data.map((posts) => {
         return (
           <div className="card">
@@ -46,17 +92,17 @@ export default function profile_landing () {
                   alt=""
                 />
               </div>
-              <h5>{posts.postedBy.userName}</h5>
+              <h5>{capitalizeFirstLetter(posts.postedBy.userName)}</h5>
+              <button id="post-btn" className = 'delete' onClick={deleteItem}>Delete post</button>
             </div>
             {/* card image */}
             <div className="card-image">
-              <img src={posts.photo} alt="" />
+              <video src={posts.photo} onClick = {postId(posts._id)} alt="" controls/>
             </div>
 
             {/* card content */}
             <div className="card-content">
-              <span className="material-symbols-outlined">favorite</span>
-              <p>1 Like</p>
+            <p><i class="fa fa-heart" id = 'myDIV' onClick={changecColor}></i> {likes}</p>
               <p>{posts.body} </p>
             </div>
 

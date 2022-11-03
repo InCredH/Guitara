@@ -1,5 +1,6 @@
 
 .card{
+    background-color: white;
     max-width: 500px;
     height: max-content;
     margin: 25px auto;
@@ -28,6 +29,10 @@
     width: 100%;
 }
 
+.card-image video{
+    width: 100%;
+    
+}
 .card-content{
     text-align: left;
     line-height: 4px;
@@ -49,8 +54,15 @@
 
 .comment{
     border: none;
-    background-color: none
-    ;font-weight: bolder;
+    background-color: white;
+    font-weight: bolder;
     cursor: pointer;
     color: #339ce3;
+}
+
+.home{
+    padding-top: 140px;
+    background-color: orange;
+    margin-bottom: -25px;
+    padding-bottom: 70px;
 }
