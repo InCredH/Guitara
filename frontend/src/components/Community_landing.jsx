@@ -11,7 +11,6 @@ export default function Community_landing () {
   
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
-    
     if (!user) {
       alert("Please Login first !");
       navigate("/login");

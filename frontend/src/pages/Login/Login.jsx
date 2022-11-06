@@ -53,17 +53,20 @@ function Login({setIsAuthenticated}) {
     e.preventDefault();
     
     try {
-      const res = await axios.post(`${API_URL}/signin`,{
+      const res = await axios.post('http://localhost:8800/api/signin',{
         email: loginData.email,
         password: loginData.password
       })
+      console.log(res)
       const userData = {
         userName: res.data.message.userName,
         email: res.data.message.email,
         token: res.data.token
       }
       const stringUserData = JSON.stringify(userData);
+      console.log(stringUserData);
       localStorage.setItem("guitaraUser", stringUserData);
+      console.log(stringUserData);
       setIsAuthenticated(true);
       setLoginData({
           email: "",
@@ -73,9 +76,9 @@ function Login({setIsAuthenticated}) {
     }catch(e) {
       console.log(e);
     }
+    
     navigate('/community');
     loginContainerRef.current.value = '';
-    
   } 
 
 	const signupInputHandler = (event) => {

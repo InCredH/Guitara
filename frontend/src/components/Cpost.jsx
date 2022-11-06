@@ -20,7 +20,7 @@ console.log(url)
       const guitaraUser= localStorage.getItem("guitaraUser");
       const User=await JSON.parse(guitaraUser);
       console.log(User.token)
-      fetch(`${SERVER_URL}/community/createPost`, {
+      fetch('http://localhost:8800/api/community/createPost', {
         method: "post",
         headers: {
           "Content-Type": "application/json",
