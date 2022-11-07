@@ -8,7 +8,7 @@ var passport = require("../strategy/JwtStrategy");
 // Route
 
 //get all posts to render on community_landing
-router.get("/allposts", passport.authenticate("jwt", { session: false }), (req, res) => {
+router.get("/allposts", requireLogin, (req, res) => {
     POST.find().sort({"createdAt": -1})
         .populate("postedBy", "_id userName")
         .then(posts => res.json(posts))
@@ -16,7 +16,7 @@ router.get("/allposts", passport.authenticate("jwt", { session: false }), (req, 
     // console.log(posts)
 })
 
-router.delete("/postdelete", passport.authenticate("jwt", { session: false }), (req, res) => {
+router.delete("/postdelete", requireLogin, (req, res) => {
     console.log(req);
     POST.deleteOne()
         .populate("postedBy", "_id userName")
@@ -25,10 +25,42 @@ router.delete("/postdelete", passport.authenticate("jwt", { session: false }), (
     // console.log(posts)
 })
 
-router.get("/profileposts", passport.authenticate("jwt", { session: false }), (req, res) => {
+
+router.put("/like",passport.authenticate("jwt", { session: false }), (req, res) => {
+    POST.findByIdAndUpdate(req.body.postId, {
+        $push:{likes: req.user._id}
+    },{
+        new:true
+    }.exec((err, result) =>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result)
+        }
+    }))
+})
+
+router.put("/unlike",passport.authenticate("jwt", { session: false }), (req, res) => {
+    POST.findByIdAndUpdate(req.body.postId, {
+        $pull:{likes: req.user._id}
+    },{
+        new:true
+    }.exec((err, result) =>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result)
+        }
+    }))
+})
+
+router.get("/profileposts", requireLogin, (req, res) => {
     // console.log(req)
-    console.log(req.user._id)
-    const user = req.user._id
+    // console.log(req.user._id)
+    // console.log("USER:\n" + req.user)
+    const user = req.user._id;
     POST.find({postedBy: user}).sort({"createdAt": -1})
         .populate("postedBy", "_id userName")
         .then(posts => res.json(posts))
@@ -36,7 +68,7 @@ router.get("/profileposts", passport.authenticate("jwt", { session: false }), (r
 })
 
 //create post
-router.post("/createPost", passport.authenticate("jwt", { session: false }), (req, res) => {
+router.post("/createPost", requireLogin, (req, res) => {
 //router.post("/createPost",(req, res) => {
     const { body, pic } = req.body;
     // console.log(pic)

@@ -5,20 +5,20 @@ const USER = mongoose.model("User")
 module.exports = (req, res, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
-        return res.status(401).json({ error: "You must have logged in 1" })
+        return res.status(401).json({ error: "You are not authenticated" })
     }
     console.log(authorization)
     const token = authorization.replace("Bearer ", "")
     jwt.verify(token, process.env.TOKEN_SECRET, (err, payload) => {
         if (err) {
             console.log(err)
-            return res.status(401).json({ error: "You must have logged in 2" })
+            return res.status(403).json({ error: "Token invalid" })
         }
-        const { _id } = payload
-        USER.findById(_id).then(userData => {
-            req.user = userData
+        // console.log(payload)
+        const { userId } = payload
+        USER.findById(userId).then(userData => {
+            req.user = userData        
             next()
         })
     })
-
 }

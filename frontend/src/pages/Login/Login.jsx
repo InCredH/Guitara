@@ -3,10 +3,11 @@ import "./loginStyles.css";
 import axios from "axios";
 import {useRef, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-
+import jwt_decode from "jwt-decode";
 
 const API_URL = process.env.REACT_APP_API_URL;
 function Login({setIsAuthenticated}) {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const loginContainerRef = useRef(null);
   const [signupData, setSignupData] = useState({
@@ -20,11 +21,42 @@ function Login({setIsAuthenticated}) {
 		password: "",
 	});
 
+  const refreshToken = async () => {
+    try {
+      const res = await axios.post("http://localhost:8800/api/refresh", { refresh_token: user.refresh_token });
+      setUser({
+        ...user,
+        access_token: res.data.access_token,
+        refresh_token: res.data.refresh_token,
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const axiosJWT = axios.create()
+
+  axiosJWT.interceptors.request.use(
+    async (config) => {
+      let currentDate = new Date();
+      const decodedToken = jwt_decode(user.access_token);
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        const data = await refreshToken();
+        config.headers["Authorization"] = "Bearer " + data.access_token;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
 
 	const Signup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_URL}/signup`,{
+      const res = await axios.post('http://localhost:8800/api/signup',{
         email: signupData.email,
         userName: signupData.userName,
         password: signupData.password
@@ -35,6 +67,7 @@ function Login({setIsAuthenticated}) {
         email: res.data.message.email,
         token: res.data.token
       }
+
       const stringUserData = JSON.stringify(userData);
       localStorage.setItem("guitaraUser", stringUserData);
       setIsAuthenticated(true);
@@ -59,14 +92,17 @@ function Login({setIsAuthenticated}) {
       })
       console.log(res)
       const userData = {
-        userName: res.data.message.userName,
-        email: res.data.message.email,
-        token: res.data.token
+        userName: res.data.userName,
+        access_token: res.data.access_token,
+        refresh_token: res.data.refresh_token,
+        userId: res.data._id
       }
+
+      console.log(userData);
       const stringUserData = JSON.stringify(userData);
       console.log(stringUserData);
       localStorage.setItem("guitaraUser", stringUserData);
-      console.log(stringUserData);
+      
       setIsAuthenticated(true);
       setLoginData({
           email: "",
@@ -92,8 +128,7 @@ function Login({setIsAuthenticated}) {
 		const { name, value } = event.target;
 		setLoginData((prevData) => {
 			return { ...prevData, [name]: value };
-		});
-    
+		});  
 	}
 
   const tabChange = () => {

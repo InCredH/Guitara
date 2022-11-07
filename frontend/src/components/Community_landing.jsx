@@ -9,6 +9,58 @@ export default function Community_landing () {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   
+  const likePost = (id) =>{
+    fetch("http://localhost:8800/api/community/like", {
+      method: "put",
+      headers:{
+        "Content-Type" : "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
+      },
+      body: JSON.stringify({
+        postId: id
+      })
+    }).then(res => res.json())
+      .then(result =>{
+        const newData = data.map(item =>{
+          if(item.id == result._id){
+            return result
+          }
+          else{
+              return item;
+          }
+        })
+        setData(newData)
+    }).catch(err =>{
+      console.log(err)
+    })
+  }
+
+  const unlikePost = (id) =>{
+    fetch("http://localhost:8800/api/community/unlike", {
+      method: "put",
+      headers:{
+        "Content-Type" : "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
+      },
+      body: JSON.stringify({
+        postId: id
+      })
+    }).then(res => res.json())
+      .then(result =>{
+        const newData = data.map(item =>{
+          if(item.id == result._id){
+            return result
+          }
+          else{
+              return item;
+          }
+        })
+        setData(newData)
+    }).catch(err =>{
+      console.log(err)
+    })
+  }
+
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
     if (!user) {
@@ -17,16 +69,17 @@ export default function Community_landing () {
       return;
     }
     
-
     // Fetching all posts
     fetch("http://localhost:8800/api/community/allposts", {
       headers: {
-        Authorization: user.token,
+        Authorization: user.access_token,
       },
     })
       .then((res) => res.json())
       .then((result) => setData(result))
       .catch((err) => console.log(err));
+
+    console.log(data)
   };
 
   useEffect(() => {

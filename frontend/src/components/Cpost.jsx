@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
 export default function Createpost() {
+  const user = localStorage.getItem("guitaraUser");
+  const obj = JSON.parse(user)
+  // console.log(typeof(user))
   const [body, setBody] = useState("");
   const [image, setImage] = useState("")
   const [url, setUrl] = useState("")
@@ -17,14 +20,15 @@ const createPost=async()=>{
   
 console.log(url)
     if (url) {
-      const guitaraUser= localStorage.getItem("guitaraUser");
+      const guitaraUser= await localStorage.getItem("guitaraUser");
+      // setUser(guitaraUser)
       const User=await JSON.parse(guitaraUser);
       console.log(User.token)
       fetch('http://localhost:8800/api/community/createPost', {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          "Authorization":  User.token,
+          "Authorization":  User.access_token,
         },
         body: JSON.stringify({
           body,
@@ -36,7 +40,7 @@ console.log(url)
             alert(data.error)
           } else {
             alert("success!")
-            navigate("/")
+            navigate("/community")
           }
         })
         .catch(err => console.log(err))
@@ -131,7 +135,7 @@ console.log(url)
                 alt=""
                 />
             </div>
-            <h5>Ayush</h5>
+            <h5>{obj.userName}</h5>
             </div>
             <textarea value={body} onChange={(e) => {
             setBody(e.target.value)

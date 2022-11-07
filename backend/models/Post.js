@@ -17,6 +17,7 @@ let postSchema = new Schema(
       type: ObjectId,
       ref: "User",
     },
+    likes:[{type:ObjectId, ref: "User"}],
   },
   { timestamps: true }
 );

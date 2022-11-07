@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.svg";
 
 
-
-
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
 export default function profile_landing () {
-  
+  const user = localStorage.getItem("guitaraUser");
+  const obj = JSON.parse(user)
   var guitaraUser;
   var [likes, setLikes] = useState(1);
   // var [user, setUser] = useState(null);
@@ -19,7 +18,7 @@ export default function profile_landing () {
   }
 
   const deleteItem = async () =>{
-    fetch(`${SERVER_URL}/community/postdelete`, {
+    fetch(`http://localhost:8800/api/community/postdelete`, {
       method: "DELETE",
     })
     .catch((err) => console.log(err))
@@ -43,10 +42,63 @@ export default function profile_landing () {
 
   }
 
+  const likePost = (id) =>{
+    fetch("http://localhost:8800/api/community/like", {
+      method: "put",
+      headers:{
+        "Content-Type" : "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
+      },
+      body: JSON.stringify({
+        postId: id
+      })
+    }).then(res => res.json())
+      .then(result =>{
+        const newData = data.map(item =>{
+          if(item.id == result._id){
+            return result
+          }
+          else{
+              return item;
+          }
+        })
+        setData(newData)
+    }).catch(err =>{
+      console.log(err)
+    })
+  }
+
+  const unlikePost = (id) =>{
+    fetch("http://localhost:8800/api/community/unlike", {
+      method: "put",
+      headers:{
+        "Content-Type" : "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
+      },
+      body: JSON.stringify({
+        postId: id
+      })
+    }).then(res => res.json())
+      .then(result =>{
+        // console.log(result)
+        const newData = data.map(item =>{
+          if(item.id == result._id){
+            return result
+          }
+          else{
+              return item;
+          }
+        })
+        setData(newData)
+    }).catch(err =>{
+      console.log(err)
+    })
+  }
+
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
     guitaraUser = user.userName;
-    console.log(guitaraUser);
+    
     if (!user) {
       alert("Please Login first !");
       navigate("/login");
@@ -56,12 +108,14 @@ export default function profile_landing () {
     // Fetching all posts
     fetch("http://localhost:8800/api/community/profileposts", {
       headers: {
-        Authorization: user.token,
+        Authorization: user.access_token,
       },
     })
       .then((res) => res.json())
       .then((result) => setData(result))
       .catch((err) => console.log(err));
+
+    console.log(data)
   };
 
   useEffect(() => {
@@ -75,7 +129,7 @@ export default function profile_landing () {
           <img src={avatar} />
         </div>
         <div className="details">
-          {/* <h3>{data[0].postedBy.userName}</h3> */}
+          <h3>{obj.userName}</h3>
           <a onClick = {editDetails} href="#">edit profile</a>
         </div>
       </div>
@@ -102,7 +156,12 @@ export default function profile_landing () {
 
             {/* card content */}
             <div className="card-content">
-            <p><i class="fa fa-heart" id = 'myDIV' onClick={changecColor}></i> {likes}</p>
+            {
+              posts.likes.includes(obj.userId)
+                ?<p><i class="fa fa-heart" onClick={() =>likePost(posts._id)}></i> {likes}</p>
+                : <p><i class="fa fa-heart new" onClick={() => unlikePost(posts._id)}></i> {likes}</p>
+            }
+            
               <p>{posts.body} </p>
             </div>
 
