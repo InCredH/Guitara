@@ -17,6 +17,14 @@ exports.createJWT = (email, userId, duration, key) => {
    });
 };
 
+exports.createRefreshJWT = (email, userId, key) => {
+   const payload = {
+      email,
+      userId,
+   };
+   return jwt.sign(payload, key);
+};
+
 // exports.createRefreshJWT = (email, userId, duration) => {
 //    const payload = {
 //       email,

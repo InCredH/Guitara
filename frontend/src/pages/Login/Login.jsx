@@ -41,7 +41,9 @@ function Login({setIsAuthenticated}) {
     async (config) => {
       let currentDate = new Date();
       const decodedToken = jwt_decode(user.access_token);
+      console.log(decodedToken)
       if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        console.log("access token expired!")
         const data = await refreshToken();
         config.headers["Authorization"] = "Bearer " + data.access_token;
       }
@@ -65,7 +67,8 @@ function Login({setIsAuthenticated}) {
       const userData = {
         userName: res.data.message.userName,
         email: res.data.message.email,
-        token: res.data.token
+        access_token: res.data.access_token,
+        refresh_token:res.data.refresh_token
       }
 
       const stringUserData = JSON.stringify(userData);

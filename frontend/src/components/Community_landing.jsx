@@ -78,8 +78,6 @@ export default function Community_landing () {
       .then((res) => res.json())
       .then((result) => setData(result))
       .catch((err) => console.log(err));
-
-    console.log(data)
   };
 
   useEffect(() => {
@@ -90,6 +88,7 @@ export default function Community_landing () {
     <div className="home">
       {/* card */}
       {data.map((posts) => {
+        console.log(typeof(data))
         return (
           <div className="card">
             {/* card header */}

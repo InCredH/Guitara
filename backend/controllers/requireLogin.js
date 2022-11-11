@@ -3,12 +3,14 @@ const mongoose = require("mongoose")
 const USER = mongoose.model("User")
 
 module.exports = (req, res, next) => {
+    // console.log(req.headers);
     const { authorization } = req.headers;
+    // console.log(authorization)
     if (!authorization) {
         return res.status(401).json({ error: "You are not authenticated" })
     }
-    console.log(authorization)
     const token = authorization.replace("Bearer ", "")
+    // const token = authorization
     jwt.verify(token, process.env.TOKEN_SECRET, (err, payload) => {
         if (err) {
             console.log(err)

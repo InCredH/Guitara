@@ -15,6 +15,9 @@ import Notes_Lessons from "./pages/Notes-lessons/Notes_lessons";
 import C_post from "./pages/Createpost/C_post";
 import Notes_Staff from "./pages/Notes-The-Staff/Notes_Staff";
 import Profile from "./pages/profile/profile_landing";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
+
 // import {ToastContainer} from "react-toastify"
 
 
@@ -22,6 +25,39 @@ import Profile from "./pages/profile/profile_landing";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+
+  // const refreshToken = async () => {
+  //   try {
+  //     const res = await axios.post("http://localhost:8800/api/refresh", { refresh_token: user.refresh_token });
+  //     setUser({
+  //       ...user,
+  //       access_token: res.data.access_token,
+  //       refresh_token: res.data.refresh_token,
+  //     });
+  //     return res.data;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const axiosJWT = axios.create()
+
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     let currentDate = new Date();
+  //     const decodedToken = jwt_decode(user.access_token);
+  //     console.log(decodedToken)
+  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       console.log("access token expired!")
+  //       const data = await refreshToken();
+  //       config.headers["Authorization"] = "Bearer " + data.access_token;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   useEffect(()=>{
     const user = localStorage.getItem("guitaraUser");

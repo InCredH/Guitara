@@ -1,14 +1,14 @@
 var User = require("../models/User.js");
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
-const { createJWT } = require("../utils/auth");
-const TIMEOUT = 3000
+const { createJWT, createRefreshJWT } = require("../utils/auth");
+const TIMEOUT = 3600
 
 const emailRegexp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 exports.signup = (req, res, next) => {
-  let { email, userName, password, password_confirmation } = req.body;
+  let { email, userName, password } = req.body;
 
   let errors = [];
 
@@ -62,9 +62,15 @@ exports.signup = (req, res, next) => {
                   TIMEOUT,
                   process.env.TOKEN_SECRET
                 );
+                let refresh_token = createRefreshJWT(
+                  user.email,
+                  user._id,
+                  process.env.REFRESH_TOKEN_SECRET
+                )
                 return res.status(201).json({
                   success: true,
-                  token: "Bearer " + access_token,
+                  access_token: "Bearer " + access_token,
+                  refresh_token: "Bearer " + refresh_token,
                   message: user,
                 });
               })
@@ -129,10 +135,10 @@ exports.signin = (req, res) => {
               process.env.TOKEN_SECRET
             );
 
-            let refresh_token = createJWT(
+            let refresh_token = createRefreshJWT(
               user.email,
               user._id,
-              TIMEOUT,
+              
               process.env.REFRESH_TOKEN_SECRET
             );
 
@@ -175,7 +181,7 @@ exports.refresh = (req, res) => {
     refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
 
     const newAccessToken = createJWT(user.email, user.userId, TIMEOUT, process.env.TOKEN_SECRET);
-    const newRefreshToken = createJWT(user.email, user.userId, TIMEOUT, process.env.REFRESH_TOKEN_SECRET);
+    const newRefreshToken = createRefreshJWT(user.email, user.userId, process.env.REFRESH_TOKEN_SECRET);
 
     refreshTokens.push(newRefreshToken);
 

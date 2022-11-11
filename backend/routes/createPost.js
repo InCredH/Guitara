@@ -8,7 +8,7 @@ var passport = require("../strategy/JwtStrategy");
 // Route
 
 //get all posts to render on community_landing
-router.get("/allposts", requireLogin, (req, res) => {
+router.get("/allposts",requireLogin, (req, res) => {
     POST.find().sort({"createdAt": -1})
         .populate("postedBy", "_id userName")
         .then(posts => res.json(posts))
@@ -16,56 +16,57 @@ router.get("/allposts", requireLogin, (req, res) => {
     // console.log(posts)
 })
 
-router.delete("/postdelete", requireLogin, (req, res) => {
-    console.log(req);
-    POST.deleteOne()
-        .populate("postedBy", "_id userName")
-        .then(posts => res.json(posts))
-        .catch(err => console.log(err))
-    // console.log(posts)
-})
-
-
-router.put("/like",passport.authenticate("jwt", { session: false }), (req, res) => {
-    POST.findByIdAndUpdate(req.body.postId, {
-        $push:{likes: req.user._id}
-    },{
-        new:true
-    }.exec((err, result) =>{
-        if(err){
-            return res.status(422).json({error:err})
-        }
-        else{
-            res.json(result)
-        }
-    }))
-})
-
-router.put("/unlike",passport.authenticate("jwt", { session: false }), (req, res) => {
-    POST.findByIdAndUpdate(req.body.postId, {
-        $pull:{likes: req.user._id}
-    },{
-        new:true
-    }.exec((err, result) =>{
-        if(err){
-            return res.status(422).json({error:err})
-        }
-        else{
-            res.json(result)
-        }
-    }))
-})
-
-router.get("/profileposts", requireLogin, (req, res) => {
+router.get("/profileposts",requireLogin, (req, res) => {
     // console.log(req)
     // console.log(req.user._id)
     // console.log("USER:\n" + req.user)
-    const user = req.user._id;
+    console.log(req.headers["userId"]);
+    const user = req.user;
+    console.log(user)
     POST.find({postedBy: user}).sort({"createdAt": -1})
         .populate("postedBy", "_id userName")
         .then(posts => res.json(posts))
         .catch(err => console.log(err))
 })
+router.delete("/postdelete/:postId", requireLogin, (req, res) => {
+    // console.log(req);
+    var postId = req.params.postId
+    POST.deleteOne({_id: postId})
+    .catch(err => console.log(err))
+    // console.log(posts)
+})
+
+
+// router.put("/like",passport.authenticate("jwt", { session: false }), (req, res) => {
+//     POST.findByIdAndUpdate(req.body.postId, {
+//         $push:{likes: req.user._id}
+//     },{
+//         new:true
+//     }.exec((err, result) =>{
+//         if(err){
+//             return res.status(422).json({error:err})
+//         }
+//         else{
+//             res.json(result)
+//         }
+//     }))
+// })
+
+// router.put("/unlike",passport.authenticate("jwt", { session: false }), (req, res) => {
+//     POST.findByIdAndUpdate(req.body.postId, {
+//         $pull:{likes: req.user._id}
+//     },{
+//         new:true
+//     }.exec((err, result) =>{
+//         if(err){
+//             return res.status(422).json({error:err})
+//         }
+//         else{
+//             res.json(result)
+//         }
+//     }))
+// })
+
 
 //create post
 router.post("/createPost", requireLogin, (req, res) => {

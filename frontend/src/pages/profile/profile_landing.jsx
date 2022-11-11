@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./profile_landing.css";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.svg";
-
+// import Likes from "./Likes";
 
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
@@ -17,9 +17,15 @@ export default function profile_landing () {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  const deleteItem = async () =>{
-    fetch(`http://localhost:8800/api/community/postdelete`, {
+  const deleteItem = async (id) =>{
+    console.log(id);
+    const user = await JSON.parse(localStorage.getItem("guitaraUser"));
+    fetch(`http://localhost:8800/api/community/postdelete/` + id, {
       method: "DELETE",
+      headers: {
+        Authorization: user.access_token,
+        userId:user.userId
+      },
     })
     .catch((err) => console.log(err))
   }
@@ -42,62 +48,11 @@ export default function profile_landing () {
 
   }
 
-  const likePost = (id) =>{
-    fetch("http://localhost:8800/api/community/like", {
-      method: "put",
-      headers:{
-        "Content-Type" : "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
-      },
-      body: JSON.stringify({
-        postId: id
-      })
-    }).then(res => res.json())
-      .then(result =>{
-        const newData = data.map(item =>{
-          if(item.id == result._id){
-            return result
-          }
-          else{
-              return item;
-          }
-        })
-        setData(newData)
-    }).catch(err =>{
-      console.log(err)
-    })
-  }
-
-  const unlikePost = (id) =>{
-    fetch("http://localhost:8800/api/community/unlike", {
-      method: "put",
-      headers:{
-        "Content-Type" : "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
-      },
-      body: JSON.stringify({
-        postId: id
-      })
-    }).then(res => res.json())
-      .then(result =>{
-        // console.log(result)
-        const newData = data.map(item =>{
-          if(item.id == result._id){
-            return result
-          }
-          else{
-              return item;
-          }
-        })
-        setData(newData)
-    }).catch(err =>{
-      console.log(err)
-    })
-  }
 
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
-    guitaraUser = user.userName;
+    // console.log(user)
+    // guitaraUser = user.userName;
     
     if (!user) {
       alert("Please Login first !");
@@ -109,13 +64,14 @@ export default function profile_landing () {
     fetch("http://localhost:8800/api/community/profileposts", {
       headers: {
         Authorization: user.access_token,
+        userId:user.userId
       },
     })
       .then((res) => res.json())
-      .then((result) => setData(result))
+      .then((result) => {setData(result)})
       .catch((err) => console.log(err));
 
-    console.log(data)
+    // console.log(data)
   };
 
   useEffect(() => {
@@ -130,7 +86,7 @@ export default function profile_landing () {
         </div>
         <div className="details">
           <h3>{obj.userName}</h3>
-          <a onClick = {editDetails} href="#">edit profile</a>
+          <button><a onClick = {editDetails} href="#">Edit Profile</a></button>
         </div>
       </div>
       <h1>Posts : </h1>
@@ -147,7 +103,7 @@ export default function profile_landing () {
                 />
               </div>
               <h5>{capitalizeFirstLetter(posts.postedBy.userName)}</h5>
-              <button id="post-btn" className = 'delete' onClick={deleteItem}>Delete post</button>
+              <button id="post-btn" className = 'delete' onClick={() =>{deleteItem(posts._id)}}>Delete post</button>
             </div>
             {/* card image */}
             <div className="card-image">
@@ -156,12 +112,8 @@ export default function profile_landing () {
 
             {/* card content */}
             <div className="card-content">
-            {
-              posts.likes.includes(obj.userId)
-                ?<p><i class="fa fa-heart" onClick={() =>likePost(posts._id)}></i> {likes}</p>
-                : <p><i class="fa fa-heart new" onClick={() => unlikePost(posts._id)}></i> {likes}</p>
-            }
-            
+              {/* <Likes data = {data} post = {posts} user = {obj}/> */}
+
               <p>{posts.body} </p>
             </div>
 
