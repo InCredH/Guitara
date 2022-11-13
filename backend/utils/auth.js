@@ -1,9 +1,9 @@
 // import jwt from "jsonwebtoken";
 const jwt = require('jsonwebtoken')
 
-// const generateRefreshToken = (email, userId, duration, token_secret) => {
-//    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "myRefreshSecretKey");
-//  };
+const generateRefreshToken = (email, userId, duration, token_secret) => {
+   return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "myRefreshSecretKey");
+ };
 
 
 exports.createJWT = (email, userId, duration, key) => {
