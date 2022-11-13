@@ -26,8 +26,11 @@ export default function profile_landing () {
         Authorization: user.access_token,
         userId:user.userId
       },
-    })
-    .catch((err) => console.log(err))
+    }).then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+      })
+      .catch((err) => console.log(err))
   }
   
   function postId(id){
@@ -40,6 +43,59 @@ export default function profile_landing () {
     // element.classList.toggle("fa fa-heart"); 
     // element.classList.toggle("far fa-heart"); 
   }
+
+  const unlikePost = (postid) =>{
+            fetch("http://localhost:8800/api/community/unlike", {
+              method: "put",
+              headers:{
+                "Content-Type" : "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
+              },
+              body: JSON.stringify({
+                postId: postid
+              })
+            }).then(res => res.json())
+              .then(result =>{
+                // console.log(result)
+                const newData = data.map(item =>{
+                  if(item.id == result._id){
+                    return result;
+                  }
+                  else{
+                      return item;
+                  }
+                })
+                setData(newData)
+            }).catch(err =>{
+              console.log(err)
+            })
+          }
+    
+          const likePost = (postid) =>{
+            fetch("http://localhost:8800/api/community/like", {
+              method: "put",
+              headers:{
+                "Content-Type" : "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
+              },
+              body: JSON.stringify({
+                postId: postid
+              })
+            }).then(res => res.json())
+              .then(result =>{
+                const newData = data.map(item =>{
+                  if(item.id == result._id){
+                    return result
+                  }
+                  else{
+                      return item;
+                  }
+                })
+                setData(newData)
+            }).catch(err =>{
+              console.log(err)
+            })
+          }
 
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -112,7 +168,12 @@ export default function profile_landing () {
 
             {/* card content */}
             <div className="card-content">
-              {/* <Likes data = {data} post = {posts} user = {obj}/> */}
+              
+              {
+                posts.likes.includes(user.id)
+                ?<button onClick={() =>likePost(posts._id)}><i class="fa fa-heart"></i> {posts.likes.length}</button>
+                :<button onClick={() => unlikePost(posts._id)}><i class="fa fa-heart new"></i> {posts.likes.length}</button>
+              }
 
               <p>{posts.body} </p>
             </div>

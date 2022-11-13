@@ -8,7 +8,8 @@ export default function Community_landing () {
   
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  
+  const user = localStorage.getItem("guitaraUser");
+  const obj = JSON.parse(user)
   const likePost = (id) =>{
     fetch("http://localhost:8800/api/community/like", {
       method: "put",
@@ -109,8 +110,13 @@ export default function Community_landing () {
 
             {/* card content */}
             <div className="card-content">
-              <span className="material-symbols-outlined">favorite</span>
-              <p>1 Like</p>
+              {/* <span className="material-symbols-outlined">favorite</span>
+              <p>1 Like</p> */}
+              
+                {/*  posts.likes.includes(user.id) */}
+                <button onClick={() =>likePost(posts._id)}><i class="fa fa-heart"></i> {posts.likes.length}</button>
+                {/* :<button onClick={() => unlikePost(posts._id)}><i class="fa fa-heart new"></i> {posts.likes.length}</button> */}
+              
               <p>{posts.body} </p>
             </div>
 

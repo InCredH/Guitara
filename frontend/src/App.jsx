@@ -15,6 +15,7 @@ import Notes_Lessons from "./pages/Notes-lessons/Notes_lessons";
 import C_post from "./pages/Createpost/C_post";
 import Notes_Staff from "./pages/Notes-The-Staff/Notes_Staff";
 import Profile from "./pages/profile/profile_landing";
+import Exercise from "./pages/Exercises/Exercise";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
@@ -73,7 +74,7 @@ function App() {
   console.log(user)
   
   return (
-      <div className="App">
+      <div>
         <Navbar isAuthenticated={isAuthenticated} user={user}/>
         <Routes>
           <Route exact path="/" element={<Home isAuthenticated={isAuthenticated} />}></Route>
@@ -92,6 +93,7 @@ function App() {
           <Route exact path="/lessons/keys" element = {<Notes_Lessons />}></Route>
           <Route exact path="/community/createpost" element = {<C_post />}></Route>
           <Route exact path="/community/profile" element = {<Profile />}></Route>
+          <Route exact path="/exercises" element = {<Exercise />}></Route>
         </Routes>
         <Bottom />
       </div>

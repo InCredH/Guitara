@@ -4,16 +4,16 @@ import axios from "axios";
 import avatar from "../images/avatar.svg";
 
 function Navbar({ isAuthenticated, user }) {
-  const [nav, setnav] = useState(false);
+  // const [nav, setnav] = useState(false);
 
-  const changeBackground = () => {
-    if (window.scrollY >= 50) {
-      setnav(true);
-    } else {
-      setnav(false);
-    }
-  };
-  window.addEventListener("scroll", changeBackground);
+  // const changeBackground = () => {
+  //   if (window.scrollY >= 50) {
+  //     setnav(true);
+  //   } else {
+  //     setnav(false);
+  //   }
+  // };
+  // window.addEventListener("scroll", changeBackground);
 
   useEffect(() => {
     console.log(isAuthenticated);

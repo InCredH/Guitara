@@ -31,8 +31,22 @@ router.get("/profileposts",requireLogin, (req, res) => {
 router.delete("/postdelete/:postId", requireLogin, (req, res) => {
     // console.log(req);
     var postId = req.params.postId
-    POST.deleteOne({_id: postId})
-    .catch(err => console.log(err))
+    POST.findOne({_id: postId})
+    .populate("postedBy", "_id userName")
+    .exec((err,post)=>{
+        if(err || !post){
+            return res.status(422).json({error:err})
+        }
+        if(post.postedBy._id.toString() === req.user._id.toString()){
+            post.remove()
+            .then(result =>{
+                res.json({message:"Successfully deleted the post !"})
+            }).catch(err =>{
+                console.log(err)
+            })
+        }
+    })
+
     // console.log(posts)
 })
 
