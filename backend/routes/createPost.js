@@ -51,35 +51,61 @@ router.delete("/postdelete/:postId", requireLogin, (req, res) => {
 })
 
 
-// router.put("/like",passport.authenticate("jwt", { session: false }), (req, res) => {
-//     POST.findByIdAndUpdate(req.body.postId, {
-//         $push:{likes: req.user._id}
-//     },{
-//         new:true
-//     }.exec((err, result) =>{
-//         if(err){
-//             return res.status(422).json({error:err})
-//         }
-//         else{
-//             res.json(result)
-//         }
-//     }))
-// })
+router.put("/like/:postId",requireLogin, async (req, res) => {
+    const post_id = req.params.postId;
+    const userId = req.user._id
 
-// router.put("/unlike",passport.authenticate("jwt", { session: false }), (req, res) => {
-//     POST.findByIdAndUpdate(req.body.postId, {
-//         $pull:{likes: req.user._id}
-//     },{
-//         new:true
-//     }.exec((err, result) =>{
-//         if(err){
-//             return res.status(422).json({error:err})
-//         }
-//         else{
-//             res.json(result)
-//         }
-//     }))
-// })
+    const post = await POST.findById(post_id);
+    const user = await USER.findById(userId);
+
+    if (user === null || post === null) {
+        return res.status(400).send({ message: "Not valid params" });
+      } else if (post.likes.includes(userId)) {
+        post.likes = post.likes.filter((idOfUser) => {
+          return idOfUser.toString() !== userId.toString();
+        });
+        await post.save();
+        const posts = await POST.find({}).sort({"createdAt": -1});
+        return res
+          .status(200)
+          .send({ sameUser: true, liked: false, count: post.likes.length,posts : posts });
+      } else {
+        post.likes.push(userId);
+        await post.save();
+        const posts = await POST.find({}).sort({"createdAt": -1});
+        res
+          .status(200)
+          .send({ sameUser: false, liked: true, count: post.likes.length,posts : posts });
+      }
+})
+
+router.put("/likes/:postId",requireLogin, async (req, res) => {
+    const post_id = req.params.postId;
+    const userId = req.user._id
+
+    const post = await POST.findById(post_id);
+    const user = await USER.findById(userId);
+
+    if (user === null || post === null) {
+        return res.status(400).send({ message: "Not valid params" });
+      } else if (post.likes.includes(userId)) {
+        post.likes = post.likes.filter((idOfUser) => {
+          return idOfUser.toString() !== userId.toString();
+        });
+        await post.save();
+        const posts = await POST.find({postedBy:req.user._id}).sort({"createdAt": -1});
+        return res
+          .status(200)
+          .send({ sameUser: true, liked: false, count: post.likes.length,posts : posts });
+      } else {
+        post.likes.push(userId);
+        await post.save();
+        const posts = await POST.find({postedBy: req.user._id}).sort({"createdAt": -1});
+        res
+          .status(200)
+          .send({ sameUser: false, liked: true, count: post.likes.length,posts : posts });
+      }
+})
 
 
 //create post

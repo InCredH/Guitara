@@ -10,57 +10,28 @@ export default function Community_landing () {
   const [data, setData] = useState([]);
   const user = localStorage.getItem("guitaraUser");
   const obj = JSON.parse(user)
+
   const likePost = (id) =>{
-    fetch("http://localhost:8800/api/community/like", {
-      method: "put",
-      headers:{
-        "Content-Type" : "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
-      },
-      body: JSON.stringify({
-        postId: id
+    try {
+      fetch("http://localhost:8800/api/community/like/" + id, {
+        method: "put",
+        headers:{
+          "Content-Type" : "application/json",
+          "Authorization": obj.access_token
+        },
+      }).then(res => res.json())
+        .then(Result =>{
+          const result = Result.posts;
+          setData(result)
+      }).catch(err =>{
+        console.log(err)
       })
-    }).then(res => res.json())
-      .then(result =>{
-        const newData = data.map(item =>{
-          if(item.id == result._id){
-            return result
-          }
-          else{
-              return item;
-          }
-        })
-        setData(newData)
-    }).catch(err =>{
-      console.log(err)
-    })
+    }catch(e) {
+      console.log(e);
+    }
+   
   }
 
-  const unlikePost = (id) =>{
-    fetch("http://localhost:8800/api/community/unlike", {
-      method: "put",
-      headers:{
-        "Content-Type" : "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
-      },
-      body: JSON.stringify({
-        postId: id
-      })
-    }).then(res => res.json())
-      .then(result =>{
-        const newData = data.map(item =>{
-          if(item.id == result._id){
-            return result
-          }
-          else{
-              return item;
-          }
-        })
-        setData(newData)
-    }).catch(err =>{
-      console.log(err)
-    })
-  }
 
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
@@ -89,7 +60,8 @@ export default function Community_landing () {
     <div className="home">
       {/* card */}
       {data.map((posts) => {
-        console.log(typeof(data))
+        var Propert=Object.values(posts);
+        console.log(Propert);
         return (
           <div className="card">
             {/* card header */}
@@ -110,13 +82,14 @@ export default function Community_landing () {
 
             {/* card content */}
             <div className="card-content">
-              {/* <span className="material-symbols-outlined">favorite</span>
-              <p>1 Like</p> */}
+              {Propert.includes(obj.userId) ?(
+                    <p><i class="fa fa-heart new " onClick={() => {likePost(posts._id)}}></i> <span>{posts.likes.length}</span></p>
+                ) : (
+                  <p><i class="fa fa-heart" onClick={() => {likePost(posts._id)}}></i> <span>{posts.likes.length}</span></p>
+                ) 
+              }
               
-                {/*  posts.likes.includes(user.id) */}
-                <button onClick={() =>likePost(posts._id)}><i class="fa fa-heart"></i> {posts.likes.length}</button>
-                {/* :<button onClick={() => unlikePost(posts._id)}><i class="fa fa-heart new"></i> {posts.likes.length}</button> */}
-              
+            
               <p>{posts.body} </p>
             </div>
 
@@ -124,7 +97,7 @@ export default function Community_landing () {
             <div className="add-comment">
               <span className="material-symbols-outlined">mood</span>
               <input type="text" placeholder="Add a comment" />
-              <button className="comment">Post</button>
+              <button className="comment">Comment</button>
             </div>
           </div>
         );

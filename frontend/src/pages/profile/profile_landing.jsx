@@ -7,15 +7,17 @@ import avatar from "../../images/avatar.svg";
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
 export default function profile_landing () {
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
   const user = localStorage.getItem("guitaraUser");
-  const obj = JSON.parse(user)
+  const obj = JSON.parse(user);
+  console.log(obj);
   var guitaraUser;
   var [likes, setLikes] = useState(1);
   // var [user, setUser] = useState(null);
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  
+  // document.getElementById("hellobutton").addEventListener("click", likePost);
 
   const deleteItem = async (id) =>{
     console.log(id);
@@ -29,79 +31,31 @@ export default function profile_landing () {
     }).then(res=>res.json())
       .then(result=>{
         console.log(result)
+        window.location.reload();
       })
       .catch((err) => console.log(err))
-  }
-  
-  function postId(id){
-    console.log(id);
-  } 
-  function changecColor() {
-    var element = document.getElementById("myDIV");
-    element.classList.toggle("mystyle"); 
-    setLikes(++likes)
-    // element.classList.toggle("fa fa-heart"); 
-    // element.classList.toggle("far fa-heart"); 
+
   }
 
-  const unlikePost = (postid) =>{
-            fetch("http://localhost:8800/api/community/unlike", {
-              method: "put",
-              headers:{
-                "Content-Type" : "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
-              },
-              body: JSON.stringify({
-                postId: postid
-              })
-            }).then(res => res.json())
-              .then(result =>{
-                // console.log(result)
-                const newData = data.map(item =>{
-                  if(item.id == result._id){
-                    return result;
-                  }
-                  else{
-                      return item;
-                  }
-                })
-                setData(newData)
-            }).catch(err =>{
-              console.log(err)
-            })
-          }
-    
-          const likePost = (postid) =>{
-            fetch("http://localhost:8800/api/community/like", {
-              method: "put",
-              headers:{
-                "Content-Type" : "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("guitaraUser")
-              },
-              body: JSON.stringify({
-                postId: postid
-              })
-            }).then(res => res.json())
-              .then(result =>{
-                const newData = data.map(item =>{
-                  if(item.id == result._id){
-                    return result
-                  }
-                  else{
-                      return item;
-                  }
-                })
-                setData(newData)
-            }).catch(err =>{
-              console.log(err)
-            })
-          }
-
-  const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  
-  function editDetails(){
-
+  const likePost = (id) =>{
+    try {
+      fetch("http://localhost:8800/api/community/likes/" + id, {
+        method: "put",
+        headers:{
+          "Content-Type" : "application/json",
+          "Authorization": obj.access_token
+        },
+      }).then(res => res.json())
+        .then(Result =>{
+          const result = Result.posts;
+          setData(result)
+      }).catch(err =>{
+        console.log(err)
+      })
+    }catch(e) {
+      console.log(e);
+    }
+   
   }
 
 
@@ -142,7 +96,7 @@ export default function profile_landing () {
         </div>
         <div className="details">
           <h3>{obj.userName}</h3>
-          <button><a onClick = {editDetails} href="#">Edit Profile</a></button>
+          <button><a href="#">Edit Profile</a></button>
         </div>
       </div>
       <h1>Posts : </h1>
@@ -158,31 +112,29 @@ export default function profile_landing () {
                   alt=""
                 />
               </div>
-              <h5>{capitalizeFirstLetter(posts.postedBy.userName)}</h5>
+              <h5>{(posts.postedBy.userName)}</h5>
               <button id="post-btn" className = 'delete' onClick={() =>{deleteItem(posts._id)}}>Delete post</button>
             </div>
             {/* card image */}
             <div className="card-image">
-              <video src={posts.photo} onClick = {postId(posts._id)} alt="" controls/>
+              <video src={posts.photo} alt="" controls/>
             </div>
 
             {/* card content */}
             <div className="card-content">
               
               {
-                posts.likes.includes(user.id)
-                ?<button onClick={() =>likePost(posts._id)}><i class="fa fa-heart"></i> {posts.likes.length}</button>
-                :<button onClick={() => unlikePost(posts._id)}><i class="fa fa-heart new"></i> {posts.likes.length}</button>
+                <p><i class="fa fa-heart new" onClick={() => {likePost(posts._id)}}>  <span> {posts.likes.length}</span></i></p>
               }
 
               <p>{posts.body} </p>
             </div>
 
-            {/* add Comment */}
+            
             <div className="add-comment">
               <span className="material-symbols-outlined">mood</span>
               <input type="text" placeholder="Add a comment" />
-              <button className="comment">Post</button>
+              <button className="comment">Comment</button>
             </div>
           </div>
         );

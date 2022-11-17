@@ -7,7 +7,21 @@ function Notes() {
     
     <div className="orange-body">
         <div className="white-body">
-            <h4> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit pariatur deserunt laudantium corporis? Ducimus, asperiores! Magni vitae et a quo natus nam debitis vero consequuntur fugiat dicta hic, recusandae, repellat inventore illo consequatur eius maiores aspernatur odio, quasi itaque tempore reiciendis? Enim, necessitatibus adipisci aliquid veritatis a beatae sunt dolorum delectus veniam officiis. Officiis esse assumenda doloremque dolor iure eaque quae laudantium est, praesentium repudiandae et fugit mollitia vitae consequatur dolorem autem? Accusantium inventore illo explicabo, ad blanditiis mollitia, nisi soluta molestiae neque excepturi quis voluptates ipsam nemo ipsa voluptate? Earum nobis illum recusandae nemo? Molestiae eligendi et ad excepturi ratione deleniti, numquam aperiam ipsa placeat adipisci eum ipsum? Nisi, obcaecati delectus? Harum reprehenderit sit est optio quaerat, maxime quos placeat ab distinctio necessitatibus! Explicabo soluta adipisci eligendi nostrum tempora mollitia illo numquam doloremque corrupti, cumque impedit fugiat ut totam labore sed aperiam cum sint dignissimos non voluptatum magni quasi?</h4> 
+            <div className="main-heading-div">
+              <h2 className="main-heading">Notes</h2>
+              <h4 className="main-heading-sub">In classical and popular music, especially from the Western world, there are twelve different notes. Seven of these notes are called the natural notes and they are represented by the white keys on the piano. The black keys on the piano represent the remaining five notes.</h4>
+            </div>
+            <div className="gray-contents-parent">
+            <div className="gray-contents">
+              <h3>Contents</h3>
+              <ul className="list">
+                <li>Natural Notes</li>
+                <li>Middle C</li>
+                <li>Octaves</li>
+                <li>Half Steps and whole steps</li>
+              </ul> 
+            </div>
+            </div>
         </div>
     </div>
   );

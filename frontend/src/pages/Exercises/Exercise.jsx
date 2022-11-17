@@ -1,46 +1,78 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import "./Exercise.css"
 
 export default function Exercise() {
-    
-	const questions = [
+
+	const [state, setState] = useState([
+		{id: 1, chord: 'F#'},
+		{id: 2, chord: 'B'},
+		{id: 3, chord: 'C'},
+		{id: 4, chord: 'D'},
+		{id: 5, chord: 'E'},
+		{id: 6, chord: 'F'},
+		{id: 7, chord: 'G'},
+		{id: 8, chord: 'Am'},
+	  ]);
+
+	  const [options, setOptions] = useState([
+		state[0],
+		state[1],
+		state[2],
+		state[3],
+	  ])
+
+		// const opt = options[0];
+	  
+		
+
+	//   console.log(options.first.chord)
+	
+	var [questions,setQuestion] = useState([
 		{
-			questionText: 'What is the capital of France?',
+			questionText: 'Which Guitar chord is this?',
+			image: (options[0].chord),
 			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
+				{ answerText: 'F#', isCorrect: true },
+				{ answerText: 'C', isCorrect: false },
+				{ answerText: 'D', isCorrect: false },
+				{ answerText: 'E', isCorrect: false },
 			],
 		},
 		{
-			questionText: 'Who is CEO of Tesla?',
+			questionText: 'Which Guitar chord is this?',
+			image:(options[1].chord),
 			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
+				{ answerText: (options[0].chord), isCorrect: true },
+				{ answerText: (options[1].chord), isCorrect: false },
+				{ answerText: (options[2].chord), isCorrect: false },
+				{ answerText: (options[3].chord), isCorrect: false },
 			],
+			// chord: {},
 		},
 		{
-			questionText: 'The iPhone was created by which company?',
+			questionText: 'Which Guitar chord is this?',
+			image: (options[2].chord),
 			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
+				{ answerText: (options[0].chord), isCorrect: true },
+				{ answerText: (options[1].chord), isCorrect: false },
+				{ answerText: (options[2].chord), isCorrect: false },
+				{ answerText: (options[3].chord), isCorrect: false },
 			],
+			// chord: {},
 		},
 		{
-			questionText: 'How many Harry Potter books are there?',
+			questionText: 'Which Guitar chord is this?',
+			image: (options[3].chord),
 			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
+				{ answerText: (options[0].chord), isCorrect: true },
+				{ answerText: (options[1].chord), isCorrect: false },
+				{ answerText: (options[2].chord), isCorrect: false },
+				{ answerText: (options[3].chord), isCorrect: false },
 			],
+			// chord: {},
 		},
-	];
+	]);
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
@@ -50,17 +82,75 @@ export default function Exercise() {
 		if (isCorrect) {
 			setScore(score + 1);
 		}
-
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
 			setShowScore(true);
 		}
+		
+		// const s1 = new Set();
+		// var rdm1 = Math.floor(Math.random() * 8);
+		// s1.add(rdm1);
+		// setOptions({
+		// 	first:state[rdm]
+		// });
+		
+		// first = state[rdm];
+		// console.log(first.chord)
+		// var rdm2 = Math.floor(Math.random() * 8);
+		// if(s1.has(rdm2)) {
+		// 	rdm2 = Math.floor(Math.random() * 8);
+		// }
+		// s1.add(rdm2);
+		// // second = state[rdm2]
+	
+		// var rdm3 = Math.floor(Math.random() * 8);
+		// if(s1.has(rdm3)) {
+		// 	rdm3 = Math.floor(Math.random() * 8);
+		// }
+		// s1.add(rdm3);
+		// third = state[rdm]
+	
+		// var rdm4 = Math.floor(Math.random() * 8);
+		// if(s1.has(rdm4)) {
+		// 	rdm4 = Math.floor(Math.random() * 8);
+		// }
+		// s1.add(rdm4);
+		// // fourth = state[rdm4]
+		// setOptions([
+		// 	state[rdm1],
+		// 	state[rdm2],
+		// 	state[rdm3],
+		// 	state[rdm4],
+		// ]);
 	};
+
+	// useEffect(()=>{
+	// 	console.log(options)
+	// 	setQuestion((questions) =>{
+	// 		const arr = [...questions];
+	// 		for(let i=0;i<arr.length;i++){
+	// 			arr[i].image = options[i].chord;
+	// 			arr[i].answerOptions = [	
+	// 				{ answerText: (options[0].chord), isCorrect: true },
+	// 				{ answerText: (options[1].chord), isCorrect: false },
+	// 				{ answerText: (options[2].chord), isCorrect: false },
+	// 				{ answerText: (options[3].chord), isCorrect: false },
+	// 			]
+	// 		}
+	// 		return arr;
+	// 	} )
+		// const nextQuestion = currentQuestion + 1;
+		// if (nextQuestion < questions.length) {
+		// 	setCurrentQuestion(nextQuestion);
+		// } else {
+		// 	setShowScore(true);
+		// }
+	// },[options]);
+
 	return (
         <div className = 'Exercise-app-wrapper'>
-
             <div className='Exercise-app'>
                 {showScore ? (
                     <div className='score-section'>
@@ -73,7 +163,12 @@ export default function Exercise() {
                                 <span>Question {currentQuestion + 1}</span>/{questions.length}
                             </div>
                             <div className='question-text'>{questions[currentQuestion].questionText}</div>
+							<div className = 'Exercise-image'>
+								{/* <ins className="scales_chords_api" chord={questions[currentQuestion].image} instrument="guitar" output="image"></ins> */}
+								{questions[currentQuestion].image}
+							</div>
                         </div>
+						
                         <div className='answer-section'>
                             {questions[currentQuestion].answerOptions.map((answerOption) => (
                                 <button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>

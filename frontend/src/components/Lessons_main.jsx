@@ -37,16 +37,16 @@ export default function Lessons_main({activeUrl, setActiveUrl, title, img}){
                     <h2>Structure</h2>
                     <ul>
                     <li>
-                        <a href="/lessons/intervals">Intervals</a>
+                        <a href="/lessons/intervals" className={`${activeUrl === "intervals" ? 'active':""}`} onClick={()=>setActiveUrl("intervals")}>Intervals</a>
                     </li>
                     <li>
-                        <a href="/lessons/chords">Chords</a>
+                        <a href="/lessons/chords" className={`${activeUrl === "chords" ? 'active':""}`} onClick={()=>setActiveUrl("chords")}>Chords</a>
                     </li>
                     <li>
-                        <a href="/lessons/scales">Scales</a>
+                        <a href="/lessons/scales" className={`${activeUrl === "scales" ? 'active':""}`} onClick={()=>setActiveUrl("scales")}>Scales</a>
                     </li>
                     <li>
-                        <a href="/lessons/keys">Keys</a>
+                        <a href="/lessons/keys" className={`${activeUrl === "keys" ? 'active':""}`} onClick={()=>setActiveUrl("keys")}>Keys</a>
                     </li>
                     </ul>
                 </li>

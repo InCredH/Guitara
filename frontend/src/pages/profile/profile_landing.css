@@ -11,6 +11,14 @@
     position: relative;
 }
 
+.new span{
+    margin-left: 2px;
+}
+
+.new .x{
+    color: red;
+}
+
 .userImage{
     width: 40%;
     text-align: right;
@@ -48,6 +56,12 @@
     position: absolute;
     top: 50px;
     right: 400px;
+}
+
+.card-image{
+    height: 280px;
+    width: auto;
+    min-width: 300px;
 }
 
 .details button a{

@@ -17,6 +17,14 @@
     padding: 11px;
 }
 
+.card-content .new span{
+    margin-left: 2px;
+}
+
+.card-content .new{
+    color: red;
+}
+
 .card-pic img{
     width: 30px;
     border-radius: 30px;

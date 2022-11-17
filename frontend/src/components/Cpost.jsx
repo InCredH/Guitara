@@ -108,7 +108,7 @@ console.log(url)
         {/* //header */}
         <div className="post-header">
             <h4 style={{ margin: "3px auto" }}>Create New Post</h4>
-            <button id="post-btn" onClick={() => { postDetails() }}>Share</button>
+            <button id="post-btn" onClick={() => { postDetails() }}>Post</button>
         </div>
         {/* image preview */}
         <div className="main-div">

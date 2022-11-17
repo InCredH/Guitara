@@ -664,13 +664,13 @@ footer{
 .footer-distributed h3{
 	color:  #ffffff;
 	font: normal 36px 'Cookie', cursive;
-	margin: 0;
 }
 
 /* The company logo */
 
 .footer-distributed .footer-left img{
 	width: 30%;
+    margin-top: -5px;
 }
 
 .footer-distributed h3 span{
