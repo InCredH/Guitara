@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const requireLogin = require("../controllers/requireLogin");
 const POST = mongoose.model("POST")
 const USER = mongoose.model("User")
-var passport = require("../strategy/JwtStrategy");
+
 // Route
 
 //get all posts to render on community_landing

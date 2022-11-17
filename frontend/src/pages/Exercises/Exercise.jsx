@@ -30,45 +30,41 @@ export default function Exercise() {
 	
 	var [questions,setQuestion] = useState([
 		{
-			questionText: 'Which Guitar chord is this?',
-			image: (options[0].chord),
+			questionText: 'Which is the thickest string in guitar?',
+			// image: (options[0].chord),
 			answerOptions: [
-				{ answerText: 'F#', isCorrect: true },
-				{ answerText: 'C', isCorrect: false },
+				{ answerText: 'E', isCorrect: true },
+				{ answerText: 'D', isCorrect: false },
+				{ answerText: 'G', isCorrect: false },
+				{ answerText: 'A', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'How many strings are on a steel string guitar?',
+			answerOptions: [
+				{ answerText: '4', isCorrect: false },
+				{ answerText: '5', isCorrect: false },
+				{ answerText: '6', isCorrect: true },
+				{ answerText: '7', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'What is the note on 12th fret on E string?',
+			answerOptions: [
+				{ answerText: 'F', isCorrect: false },
+				{ answerText: 'F#', isCorrect: false },
+				{ answerText: 'G', isCorrect: false },
+				{ answerText: 'E', isCorrect: true },
+			],
+			// chord: {},
+		},
+		{
+			questionText: 'Which scale includes all natural notes?',
+			answerOptions: [
+				{ answerText: 'C', isCorrect: true },
 				{ answerText: 'D', isCorrect: false },
 				{ answerText: 'E', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Which Guitar chord is this?',
-			image:(options[1].chord),
-			answerOptions: [
-				{ answerText: (options[0].chord), isCorrect: true },
-				{ answerText: (options[1].chord), isCorrect: false },
-				{ answerText: (options[2].chord), isCorrect: false },
-				{ answerText: (options[3].chord), isCorrect: false },
-			],
-			// chord: {},
-		},
-		{
-			questionText: 'Which Guitar chord is this?',
-			image: (options[2].chord),
-			answerOptions: [
-				{ answerText: (options[0].chord), isCorrect: true },
-				{ answerText: (options[1].chord), isCorrect: false },
-				{ answerText: (options[2].chord), isCorrect: false },
-				{ answerText: (options[3].chord), isCorrect: false },
-			],
-			// chord: {},
-		},
-		{
-			questionText: 'Which Guitar chord is this?',
-			image: (options[3].chord),
-			answerOptions: [
-				{ answerText: (options[0].chord), isCorrect: true },
-				{ answerText: (options[1].chord), isCorrect: false },
-				{ answerText: (options[2].chord), isCorrect: false },
-				{ answerText: (options[3].chord), isCorrect: false },
+				{ answerText: 'G', isCorrect: false },
 			],
 			// chord: {},
 		},

@@ -46,7 +46,7 @@ try{
   console.log("Connected to Database Sucessfully");
 }
 catch(error){
-  console.log(error);
+  console.log("Error connecting");
   console.log('Could not connect to database')
 }
   
