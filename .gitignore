@@ -12,10 +12,7 @@ node_modules
 build
 
 #Backend env
-.env
-
-#Frontend env
-.local.env
+backend/.env
 
 # misc
 .DS_Store
