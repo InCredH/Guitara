@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  frontend:
+    image: incredh/guitara-frontend
+    build:
+      context: "./frontend"
+    ports:
+      - "80:80"
+    environment:
+      "REACT_APP_API_URL": "${GUITARA_BACKEND}"
+  backend:
+    image: incredh/guitara-backend
+    build:
+      context: "./backend"
+    ports:
+      - "8800:8800"
+    environment:
+      "PORT": "${BACKEND_GUITARA_PORT}"
+      "MONGO_URI": "${GUITARA_MONGO_URI}"
+      "TOKEN_SECRET": "${GUITARA_TOKEN}"
