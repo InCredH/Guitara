@@ -14,7 +14,7 @@ function Login({setIsAuthenticated}) {
 		email: "",
 		userName: "",
 		password: "",
-	});
+	}); 
   const [loginData, setLoginData] = useState({
 		email: "",
 		userName: "",

@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Notes_scales.css";
 import Notes from "../../components/Notes_lessons"
 import Lessons_main from "../../components/Lessons_main"
 import notes from "../../images/notes_1.png"

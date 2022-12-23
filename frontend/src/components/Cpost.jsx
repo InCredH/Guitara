@@ -6,22 +6,20 @@ import { useNavigate } from "react-router-dom";
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
 export default function Createpost() {
+  //get the user from local storage
   const user = localStorage.getItem("guitaraUser");
   const obj = JSON.parse(user)
-  // console.log(typeof(user))
+
+
   const [body, setBody] = useState("");
   const [image, setImage] = useState("")
   const [url, setUrl] = useState("")
   const navigate = useNavigate()
-  
-  // Toast functions
 
+  //  post request to the database and then navigate to community page 
 const createPost=async()=>{
-  
-console.log(url)
     if (url) {
       const guitaraUser= await localStorage.getItem("guitaraUser");
-      // setUser(guitaraUser)
       const User=await JSON.parse(guitaraUser);
       console.log(User.token)
       fetch('http://localhost:8800/api/community/createPost', {
@@ -47,22 +45,12 @@ console.log(url)
     }
 }
 
+//  if there is any changes in the usestate variable of url, then it calls createPost function
   useEffect(() => {
      createPost()// saving post to mongodb
   }, [url])
 
-
-  // posting image to cloudinary
-//   const uploadImage = e => {
-//     console.log(e);
-//     // const files = e.target.files[0];
-//     // const data = new FormData()
-//     // data.append("file", image)
-//     // data.append("upload_preset", "guitaradb")
-//     // data.append("cloud_name", "guitara")
-//   }
-
-
+//  function called after clicking on share button
   const postDetails = async () => {
 
     console.log(body, image)
@@ -70,29 +58,24 @@ console.log(url)
     data.append("upload_preset", "guitaradb")
     data.append("file", image)
     data.append("cloud_name", "guitara")
-    
-    // axios.post("https://api.cloudinary.com/v1_1/guitara/image/upload", data)
-    // // .then(res => res.json())
-    // .then(data => setUrl(data.URL))
-    // .catch(err => console.log(err))
 
+    // fetch from cloudinary a link for the image 
     fetch("https://api.cloudinary.com/v1_1/guitara/video/upload", {
       method: "post",
       body: data
     }).then(async (res) => {
       const response = await res.json();
+      // the url use state is set here , after this a use effect is called
       setUrl(response.url);
     })
       .catch(err => console.log(err))
-    // for (var pair of data.entries()) {
-    //     console.log(pair); 
-    // }
   }
 
   useEffect(() =>{
     console.log(image)
   },[image])
 
+  // it is the on change function called whenever there is any image in the input 
   const loadfile = (event) => {
     var output = document.getElementById("output");
     console.log(output)
@@ -102,6 +85,7 @@ console.log(url)
       URL.revokeObjectURL(output.src); // free memory
     };
   };
+
   return (
     <div className="background-post">
         <div className="createPost">

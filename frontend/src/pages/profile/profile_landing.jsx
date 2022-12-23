@@ -7,18 +7,20 @@ import avatar from "../../images/avatar.svg";
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
 export default function profile_landing () {
+  //data useState hook - to update page with all posts fetched
   const [data, setData] = useState([]);
+
   const navigate = useNavigate();
+  
+  //getting user from local storage
   const user = localStorage.getItem("guitaraUser");
   const obj = JSON.parse(user);
-  console.log(obj);
-  var guitaraUser;
-  var [likes, setLikes] = useState(1);
-  // var [user, setUser] = useState(null);
+  // console.log(obj);
+  // var guitaraUser;
+  // var [likes, setLikes] = useState(1);
+ 
 
-  
-  // document.getElementById("hellobutton").addEventListener("click", likePost);
-
+//  it fetches the delete end point and then returns the updated posts
   const deleteItem = async (id) =>{
     console.log(id);
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
@@ -36,6 +38,8 @@ export default function profile_landing () {
       .catch((err) => console.log(err))
 
   }
+
+  //  it fetches the like end point and then returns the updated posts
 
   const likePost = (id) =>{
     try {
@@ -55,16 +59,12 @@ export default function profile_landing () {
     }catch(e) {
       console.log(e);
     }
-   
   }
 
-
+//  fetching all posts 
   const getPosts = async () => {
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
-    // console.log(user)
-    // guitaraUser = user.userName;
-    
-    if (!user) {
+      if (!user) {
       alert("Please Login first !");
       navigate("/login");
       return;
@@ -80,10 +80,9 @@ export default function profile_landing () {
       .then((res) => res.json())
       .then((result) => {setData(result)})
       .catch((err) => console.log(err));
-
-    // console.log(data)
   };
 
+//  it is calling the function getPosts whenever the site is loaded
   useEffect(() => {
     getPosts();
   }, []);
@@ -115,12 +114,9 @@ export default function profile_landing () {
               <h5>{(posts.postedBy.userName)}</h5>
               <button id="post-btn" className = 'delete' onClick={() =>{deleteItem(posts._id)}}>Delete post</button>
             </div>
-            {/* card image */}
             <div className="card-image">
               <video src={posts.photo} alt="" controls/>
             </div>
-
-            {/* card content */}
             <div className="card-content">
               
               {
