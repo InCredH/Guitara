@@ -33,39 +33,6 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
 
-  // const refreshToken = async () => {
-  //   try {
-  //     const res = await axios.post("http://localhost:8800/api/refresh", { refresh_token: user.refresh_token });
-  //     setUser({
-  //       ...user,
-  //       access_token: res.data.access_token,
-  //       refresh_token: res.data.refresh_token,
-  //     });
-  //     return res.data;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const axiosJWT = axios.create()
-
-  // axiosJWT.interceptors.request.use(
-  //   async (config) => {
-  //     let currentDate = new Date();
-  //     const decodedToken = jwt_decode(user.access_token);
-  //     console.log(decodedToken)
-  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
-  //       console.log("access token expired!")
-  //       const data = await refreshToken();
-  //       config.headers["Authorization"] = "Bearer " + data.access_token;
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-
   useEffect(()=>{
     const user = localStorage.getItem("guitaraUser");
     if(user) {

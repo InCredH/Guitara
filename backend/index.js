@@ -9,6 +9,7 @@ require('dotenv').config();
 //import routes
 var db  = require('./models/User');
 var authRoutes = require('./routes/auth');
+var blogRoutes = require('./routes/crawl');
 
 var dbpost  = require('./models/Post');
 var postRoutes = require('./routes/createPost');
@@ -28,12 +29,17 @@ app.use(cors(corsOptions));
 
 //routes middleware
 app.use('/api', authRoutes);
+app.use('/api', blogRoutes);
 app.use('/api/community', postRoutes);
 // app.use('/api/community', allpostRoutes)
 
 app.get("/", (req, res) => {
   res.send("Backend is setup and running!");
 });
+
+// app.get("/getblog", (req, res) => {
+//   res.send("Crawling!");
+// });
 
 //connencting to backend
 const connectionParams={
@@ -54,4 +60,5 @@ catch(error){
   app.listen(process.env.PORT, () => {
     console.log('listening for requests on port', process.env.PORT);
   })
+
 

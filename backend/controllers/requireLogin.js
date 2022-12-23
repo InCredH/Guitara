@@ -3,9 +3,9 @@ const mongoose = require("mongoose")
 const USER = mongoose.model("User")
 
 module.exports = (req, res, next) => {
-    // console.log(req.headers);
+    
     const { authorization } = req.headers;
-    // console.log(authorization)
+    
     if (!authorization) {
         return res.status(401).json({ error: "You are not authenticated" })
     }

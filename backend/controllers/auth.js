@@ -24,14 +24,6 @@ exports.signup = (req, res, next) => {
   if (!password) {
     errors.push({ password: "required" });
   }
-  // if (!password_confirmation) {
-  //   errors.push({
-  //    password_confirmation: "required",
-  //   });
-  // }
-  // if (password != password_confirmation) {
-  //   errors.push({ password: "mismatch" });
-  // }
   if (errors.length > 0) {
     return res.status(422).json({ errors: errors });
   }

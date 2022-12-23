@@ -28,6 +28,7 @@ router.get("/profileposts",requireLogin, (req, res) => {
         .then(posts => res.json(posts))
         .catch(err => console.log(err))
 })
+
 router.delete("/postdelete/:postId", requireLogin, (req, res) => {
     // console.log(req);
     var postId = req.params.postId
@@ -50,7 +51,7 @@ router.delete("/postdelete/:postId", requireLogin, (req, res) => {
     // console.log(posts)
 })
 
-
+// Community 
 router.put("/like/:postId",requireLogin, async (req, res) => {
     const post_id = req.params.postId;
     const userId = req.user._id
@@ -65,23 +66,23 @@ router.put("/like/:postId",requireLogin, async (req, res) => {
           return idOfUser.toString() !== userId.toString();
         });
         await post.save();
-        const posts = await POST.find({}).sort({"createdAt": -1});
+        const posts = await POST.find({}).populate("postedBy", "_id userName").sort({"createdAt": -1});
         return res
           .status(200)
           .send({ sameUser: true, liked: false, count: post.likes.length,posts : posts });
       } else {
         post.likes.push(userId);
         await post.save();
-        const posts = await POST.find({}).sort({"createdAt": -1});
+        const posts = await POST.find({}).populate("postedBy", "_id userName").sort({"createdAt": -1});
         res
           .status(200)
           .send({ sameUser: false, liked: true, count: post.likes.length,posts : posts });
       }
 })
-
+// profile landing 
 router.put("/likes/:postId",requireLogin, async (req, res) => {
     const post_id = req.params.postId;
-    const userId = req.user._id
+    const userId = req.user._id;
 
     const post = await POST.findById(post_id);
     const user = await USER.findById(userId);
@@ -93,14 +94,14 @@ router.put("/likes/:postId",requireLogin, async (req, res) => {
           return idOfUser.toString() !== userId.toString();
         });
         await post.save();
-        const posts = await POST.find({postedBy:req.user._id}).sort({"createdAt": -1});
+        const posts = await POST.find({postedBy:req.user._id}).populate("postedBy", "_id userName").sort({"createdAt": -1});
         return res
           .status(200)
           .send({ sameUser: true, liked: false, count: post.likes.length,posts : posts });
       } else {
         post.likes.push(userId);
         await post.save();
-        const posts = await POST.find({postedBy: req.user._id}).sort({"createdAt": -1});
+        const posts = await POST.find({postedBy: req.user._id}).populate("postedBy", "_id userName").sort({"createdAt": -1});
         res
           .status(200)
           .send({ sameUser: false, liked: true, count: post.likes.length,posts : posts });

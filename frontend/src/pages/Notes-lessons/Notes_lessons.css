@@ -4,19 +4,42 @@
     width: 100%;
     min-height: 100vh;
     text-align: center;
+    justify-content: center;
     padding: 70px 0;
 }
 
 .white-body{
     background-color: white;
-    width: 100px;
+    width: 80%;
     min-height: 100vh;
     /* height: 2050px; */
     margin: auto;
     border-radius: 15px;
+    text-align: center;
+    padding-top: 40px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .white-body img{
     width: 80%;
+}
+
+.web_shit{
+    font-size: 17px;
+    font-weight: 100 !important;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+}
+.web-shit h3{
+    justify-items: center;
+}
+
+.web_top{
+    width: 80%;
+    margin: auto;
+}
+
+.intro{
+    margin-top: 20px;
 }

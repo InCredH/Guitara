@@ -12,9 +12,6 @@ function About(){
                 <h1>About Us</h1>
             </div>
             <div className="about-body">
-            {/* <div className="abt-bx header">
-                <About_box img = {contact} details = "Get to know us and meet the people behind Musicca. Company." heading = "About company" ></About_box>   
-            </div> */}
             <h1>Creators</h1>
             <div className="abt-bx">  
                 

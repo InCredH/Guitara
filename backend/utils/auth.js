@@ -1,4 +1,3 @@
-// import jwt from "jsonwebtoken";
 const jwt = require('jsonwebtoken')
 
 const generateRefreshToken = (email, userId, duration, token_secret) => {
@@ -24,15 +23,4 @@ exports.createRefreshJWT = (email, userId, key) => {
    };
    return jwt.sign(payload, key);
 };
-
-// exports.createRefreshJWT = (email, userId, duration) => {
-//    const payload = {
-//       email,
-//       userId,
-//       duration
-//    };
-//    return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-//      expiresIn: duration,
-//    });
-// };
 
