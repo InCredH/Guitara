@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import avatar from "../../images/avatar.svg";
 // import Likes from "./Likes";
 
-const SERVER_URL = process.env.REACT_APP_API_URL;
+const APP_URL = process.env.REACT_APP_API_URL;
 
 export default function profile_landing () {
   //data useState hook - to update page with all posts fetched
@@ -24,7 +24,7 @@ export default function profile_landing () {
   const deleteItem = async (id) =>{
     console.log(id);
     const user = await JSON.parse(localStorage.getItem("guitaraUser"));
-    fetch(`http://localhost:8800/api/community/postdelete/` + id, {
+    fetch(APP_URL+"community/postdelete/" + id, {
       method: "DELETE",
       headers: {
         Authorization: user.access_token,
@@ -43,7 +43,7 @@ export default function profile_landing () {
 
   const likePost = (id) =>{
     try {
-      fetch("http://localhost:8800/api/community/likes/" + id, {
+      fetch(APP_URL+"community/likes/" + id, {
         method: "put",
         headers:{
           "Content-Type" : "application/json",
@@ -71,7 +71,7 @@ export default function profile_landing () {
     }
     
     // Fetching all posts
-    fetch("http://localhost:8800/api/community/profileposts", {
+    fetch(APP_URL+"community/profileposts", {
       headers: {
         Authorization: user.access_token,
         userId:user.userId

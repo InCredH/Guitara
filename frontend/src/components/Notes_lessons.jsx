@@ -5,7 +5,7 @@ import image from "../images/Notes_p.png";
 import { useState, useEffect } from "react";
 
 // import note_image from "../images/lessons-landing-note.svg";
-
+const APP_URL = process.env.REACT_APP_API_URL
 function Notes() {
   const [para, setPara] = useState([{}]);
   const [title, setTitle] = useState([{}]);
@@ -19,7 +19,7 @@ function Notes() {
     // }
 
     // Fetching all posts
-    await fetch("http://localhost:8800/api/getblog", {
+    await fetch(APP_URL+"getblog", {
       // headers: {
       //   Authorization: user.access_token,
       // },

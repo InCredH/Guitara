@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+
 export default function Community_landing () {
   
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function Community_landing () {
 
   const likePost = (id) =>{
     try {
-      fetch("http://localhost:8800/api/community/like/" + id, {
+      fetch(API_URL+"community/like/" + id, {
         method: "put",
         headers:{
           "Content-Type" : "application/json",
@@ -44,7 +45,7 @@ export default function Community_landing () {
     }
     
     // Fetching all posts
-    fetch("http://localhost:8800/api/community/allposts", {
+    fetch(API_URL+"community/allposts", {
       headers: {
         Authorization: user.access_token,
       },

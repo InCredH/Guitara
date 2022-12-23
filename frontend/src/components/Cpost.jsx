@@ -3,7 +3,7 @@ import "../pages/Createpost/cpost.css";
 import { useNavigate } from "react-router-dom";
 
 
-const SERVER_URL = process.env.REACT_APP_API_URL;
+const APP_URL = process.env.REACT_APP_API_URL;
 
 export default function Createpost() {
   //get the user from local storage
@@ -22,7 +22,7 @@ const createPost=async()=>{
       const guitaraUser= await localStorage.getItem("guitaraUser");
       const User=await JSON.parse(guitaraUser);
       console.log(User.token)
-      fetch('http://localhost:8800/api/community/createPost', {
+      fetch(APP_URL+"community/createPost", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

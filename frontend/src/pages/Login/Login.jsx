@@ -5,7 +5,7 @@ import {useRef, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const APP_URL = process.env.REACT_APP_API_URL;
 function Login({setIsAuthenticated}) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Login({setIsAuthenticated}) {
 
   const refreshToken = async () => {
     try {
-      const res = await axios.post("http://localhost:8800/api/refresh", { refresh_token: user.refresh_token });
+      const res = await axios.post(APP_URL+"refresh", { refresh_token: user.refresh_token });
       setUser({
         ...user,
         access_token: res.data.access_token,
@@ -58,7 +58,7 @@ function Login({setIsAuthenticated}) {
 	const Signup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8800/api/signup',{
+      const res = await axios.post(APP_URL+"signup",{
         email: signupData.email,
         userName: signupData.userName,
         password: signupData.password
@@ -89,7 +89,7 @@ function Login({setIsAuthenticated}) {
     e.preventDefault();
     
     try {
-      const res = await axios.post('http://localhost:8800/api/signin',{
+      const res = await axios.post(APP_URL+"signin",{
         email: loginData.email,
         password: loginData.password
       })
