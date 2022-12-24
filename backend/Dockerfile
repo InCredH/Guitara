@@ -1,7 +1,8 @@
-FROM node
+FROM alpine
 COPY . .
-RUN apt update && \
-    apt install -y npm && \
+RUN apk update && \
+    apk add npm && \
+    apk add node-js && \
     npm i && \
     npm i -g nodemon
 ENTRYPOINT ["nodemon", "server"]
