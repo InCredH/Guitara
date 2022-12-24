@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser')
+'use strict';
 
 // import dotenv from 'dotenv';
 require('dotenv').config();
@@ -17,7 +18,6 @@ var postRoutes = require('./routes/createPost');
 //app
 const app = express()
 app.use(express.static('public'));
-  
   const corsOptions = {
     origin: "*",
   };
@@ -36,10 +36,6 @@ app.use('/api/community', postRoutes);
 app.get("/", (req, res) => {
   res.send("Backend is setup and running!");
 });
-
-// app.get("/getblog", (req, res) => {
-//   res.send("Crawling!");
-// });
 
 //connencting to backend
 const connectionParams={

@@ -25,7 +25,6 @@ async function run(){
     
     console.log("*************************************************");
     
-    
     await browser.close()
 
     return {headings, paras};
@@ -33,7 +32,7 @@ async function run(){
 
 router.get('/getblog',async (req,res) => {
     try{
-        obj = await run()
+        var obj = await run()
         res.status(200).send(obj);
     } catch(error) {
         console.error(error.message);
