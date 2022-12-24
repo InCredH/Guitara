@@ -1,11 +1,19 @@
 var express = require('express');
+//app
+const app = express()
 var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser')
+
+var morgan = require('morgan')
+morgan.format('myFormat', '[:date[clf]] ":method :url" :status :res[content-length] - :response-time ms');
+app.use(morgan('tiny'));
+
 'use strict';
 
 // import dotenv from 'dotenv';
 require('dotenv').config();
+
 
 //import routes
 var db  = require('./models/User');
@@ -15,12 +23,12 @@ var blogRoutes = require('./routes/crawl');
 var dbpost  = require('./models/Post');
 var postRoutes = require('./routes/createPost');
 
-//app
-const app = express()
+
+
 app.use(express.static('public'));
-  const corsOptions = {
-    origin: "*",
-  };
+const corsOptions = {
+  origin: "*",
+};
 
 //middlewares
 app.use(bodyParser.json());
