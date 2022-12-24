@@ -1,4 +1,4 @@
-FROM node:16-bullseye as builder
+FROM node
 COPY . .
 RUN apt update && \
     apt install -y npm && \
